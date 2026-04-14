@@ -12,6 +12,26 @@ local explosive_enemy_entities = {
 	"mother-explosive-worm-turret"
 }
 
+local explosive_planets = {
+	"moshine",
+	"nexus"
+}
+
+local explosive_source_planets = {
+	"nauvis",
+	"vulcanus"
+}
+
+local explosive_enemy_autoplace = {
+	["explosive-biter-spawner"] = "unit-spawner",
+	["small-explosive-worm-turret"] = "turret",
+	["medium-explosive-worm-turret"] = "turret",
+	["big-explosive-worm-turret"] = "turret",
+	["behemoth-explosive-worm-turret"] = "turret",
+	["leviathan-explosive-worm-turret"] = "turret",
+	["mother-explosive-worm-turret"] = "turret"
+}
+
 local explosive_planet_tiles = {
 	"moshine-rock",
 	"moshine-hot-swamp",
@@ -38,72 +58,16 @@ local explosive_planet_tiles = {
 	"volcanic-ash-cracks"
 }
 
-local function restrict_entity_to_explosive_tiles(entity_type, entity_name)
-	local entity = data.raw[entity_type] and data.raw[entity_type][entity_name]
-	if entity and entity.autoplace then
-		entity.autoplace.tile_restriction = explosive_planet_tiles
-	end
+local existing_explosive_planet_tiles = enemy_autoplace.existing_tiles(explosive_planet_tiles)
+
+for entity_name, entity_type in pairs(explosive_enemy_autoplace) do
+	enemy_autoplace.restrict_entity_to_tiles(entity_type, entity_name, existing_explosive_planet_tiles)
 end
 
-local function remove_explosive_enemies_from_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	if map_gen_settings.autoplace_controls then
-		map_gen_settings.autoplace_controls[explosive_enemy_control] = nil
-	end
-
-	local entity_settings = map_gen_settings.autoplace_settings
-		and map_gen_settings.autoplace_settings.entity
-		and map_gen_settings.autoplace_settings.entity.settings
-
-	if not entity_settings then
-		return
-	end
-
-	for _, entity_name in pairs(explosive_enemy_entities) do
-		entity_settings[entity_name] = nil
-	end
+for _, planet_name in pairs(explosive_source_planets) do
+	enemy_autoplace.remove_entities_from_planet(planet_name, explosive_enemy_entities, explosive_enemy_control)
 end
 
-local function add_explosive_enemies_to_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	planet.pollutant_type = planet.pollutant_type or "pollution"
-	enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
-	map_gen_settings.autoplace_controls = map_gen_settings.autoplace_controls or {}
-	map_gen_settings.autoplace_controls[explosive_enemy_control] = {
-		frequency = 1,
-		size = 1,
-		richness = 1
-	}
-
-	map_gen_settings.autoplace_settings = map_gen_settings.autoplace_settings or {}
-	map_gen_settings.autoplace_settings.entity = map_gen_settings.autoplace_settings.entity or {}
-	map_gen_settings.autoplace_settings.entity.settings = map_gen_settings.autoplace_settings.entity.settings or {}
-
-	for _, entity_name in pairs(explosive_enemy_entities) do
-		map_gen_settings.autoplace_settings.entity.settings[entity_name] = {}
-	end
+for _, planet_name in pairs(explosive_planets) do
+	enemy_autoplace.add_entities_to_planet(planet_name, explosive_enemy_entities, explosive_enemy_control)
 end
-
-restrict_entity_to_explosive_tiles("unit-spawner", "explosive-biter-spawner")
-restrict_entity_to_explosive_tiles("turret", "small-explosive-worm-turret")
-restrict_entity_to_explosive_tiles("turret", "medium-explosive-worm-turret")
-restrict_entity_to_explosive_tiles("turret", "big-explosive-worm-turret")
-restrict_entity_to_explosive_tiles("turret", "behemoth-explosive-worm-turret")
-restrict_entity_to_explosive_tiles("turret", "leviathan-explosive-worm-turret")
-restrict_entity_to_explosive_tiles("turret", "mother-explosive-worm-turret")
-
-remove_explosive_enemies_from_planet("nauvis")
-remove_explosive_enemies_from_planet("vulcanus")
-
-add_explosive_enemies_to_planet("moshine")
-add_explosive_enemies_to_planet("nexus")

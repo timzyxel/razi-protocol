@@ -30,6 +30,10 @@ local cold_planets = {
 	"nexus"
 }
 
+local cold_source_planets = {
+	"nauvis"
+}
+
 local cold_planet_tiles = {
 	"snow-flat",
 	"snow-crests",
@@ -64,18 +68,7 @@ local cold_planet_tiles = {
 	"volcanic-ash-cracks"
 }
 
-local function existing_tiles(tile_names)
-	local tiles = {}
-	for _, tile_name in pairs(tile_names) do
-		if data.raw.tile[tile_name] then
-			table.insert(tiles, tile_name)
-		end
-	end
-
-	return tiles
-end
-
-local existing_cold_planet_tiles = existing_tiles(cold_planet_tiles)
+local existing_cold_planet_tiles = enemy_autoplace.existing_tiles(cold_planet_tiles)
 
 local function cold_autoplace_expression(distance, worm)
 	local expression = "cb_enemy_autoplace_base(" .. distance .. ", " .. (42000 + distance) .. ")"
@@ -99,64 +92,21 @@ local function restrict_entity_to_cold_tiles(entity_type, entity_name, distance,
 	end
 end
 
-local function remove_cold_enemies_from_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	if map_gen_settings.autoplace_controls then
-		map_gen_settings.autoplace_controls[cold_enemy_control] = nil
-	end
-
-	local entity_settings = map_gen_settings.autoplace_settings
-		and map_gen_settings.autoplace_settings.entity
-		and map_gen_settings.autoplace_settings.entity.settings
-
-	if not entity_settings then
-		return
-	end
-
-	for _, entity_name in pairs(cold_enemy_entities) do
-		entity_settings[entity_name] = nil
-	end
-end
-
-local function add_cold_enemies_to_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	planet.pollutant_type = planet.pollutant_type or "pollution"
-	enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
-	map_gen_settings.autoplace_controls = map_gen_settings.autoplace_controls or {}
-	map_gen_settings.autoplace_controls[cold_enemy_control] = {
-		frequency = 1,
-		size = 1,
-		richness = 1
-	}
-
-	map_gen_settings.autoplace_settings = map_gen_settings.autoplace_settings or {}
-	map_gen_settings.autoplace_settings.entity = map_gen_settings.autoplace_settings.entity or {}
-	map_gen_settings.autoplace_settings.entity.settings = map_gen_settings.autoplace_settings.entity.settings or {}
-
-	for _, entity_name in pairs(cold_enemy_entities) do
-		local autoplace = cold_enemy_autoplace[entity_name]
-		if autoplace and data.raw[autoplace.type] and data.raw[autoplace.type][entity_name] then
-			map_gen_settings.autoplace_settings.entity.settings[entity_name] = {}
-		end
-	end
+local function cold_entity_exists(entity_name)
+	local autoplace = cold_enemy_autoplace[entity_name]
+	return autoplace
+		and data.raw[autoplace.type]
+		and data.raw[autoplace.type][entity_name]
 end
 
 for entity_name, autoplace in pairs(cold_enemy_autoplace) do
 	restrict_entity_to_cold_tiles(autoplace.type, entity_name, autoplace.distance, autoplace.worm)
 end
 
-remove_cold_enemies_from_planet("nauvis")
+for _, planet_name in pairs(cold_source_planets) do
+	enemy_autoplace.remove_entities_from_planet(planet_name, cold_enemy_entities, cold_enemy_control)
+end
 
 for _, planet_name in pairs(cold_planets) do
-	add_cold_enemies_to_planet(planet_name)
+	enemy_autoplace.add_entities_to_planet(planet_name, cold_enemy_entities, cold_enemy_control, cold_entity_exists)
 end

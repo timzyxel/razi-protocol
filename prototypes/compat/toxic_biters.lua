@@ -19,6 +19,21 @@ local toxic_planets = {
 	"crucible"
 }
 
+local toxic_source_planets = {
+	"nauvis",
+	"vulcanus"
+}
+
+local toxic_enemy_autoplace = {
+	["toxic-biter-spawner"] = "unit-spawner",
+	["small-toxic-worm-turret"] = "turret",
+	["medium-toxic-worm-turret"] = "turret",
+	["big-toxic-worm-turret"] = "turret",
+	["behemoth-toxic-worm-turret"] = "turret",
+	["leviathan-toxic-worm-turret"] = "turret",
+	["mother-toxic-worm-turret"] = "turret"
+}
+
 local toxic_planet_tiles = {
 	"cubium-volcanic-cracks-hot",
 	"cubium-volcanic-jagged-ground",
@@ -83,90 +98,16 @@ local toxic_planet_tiles = {
 	"planet-crucible-sand-1"
 }
 
-local function existing_tiles(tile_names)
-	local tiles = {}
-	for _, tile_name in pairs(tile_names) do
-		if data.raw.tile[tile_name] then
-			table.insert(tiles, tile_name)
-		end
-	end
+local existing_toxic_planet_tiles = enemy_autoplace.existing_tiles(toxic_planet_tiles)
 
-	return tiles
+for entity_name, entity_type in pairs(toxic_enemy_autoplace) do
+	enemy_autoplace.restrict_entity_to_tiles(entity_type, entity_name, existing_toxic_planet_tiles)
 end
 
-local existing_toxic_planet_tiles = existing_tiles(toxic_planet_tiles)
-
-local function restrict_entity_to_toxic_tiles(entity_type, entity_name)
-	local entity = data.raw[entity_type] and data.raw[entity_type][entity_name]
-	if entity and entity.autoplace then
-		entity.autoplace.tile_restriction = existing_toxic_planet_tiles
-	end
+for _, planet_name in pairs(toxic_source_planets) do
+	enemy_autoplace.remove_entities_from_planet(planet_name, toxic_enemy_entities)
 end
-
-local function toxic_entity_exists(entity_name)
-	return
-		(data.raw["unit-spawner"] and data.raw["unit-spawner"][entity_name]) or
-		(data.raw.turret and data.raw.turret[entity_name])
-end
-
-local function remove_toxic_enemies_from_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	local entity_settings = map_gen_settings.autoplace_settings
-		and map_gen_settings.autoplace_settings.entity
-		and map_gen_settings.autoplace_settings.entity.settings
-
-	if not entity_settings then
-		return
-	end
-
-	for _, entity_name in pairs(toxic_enemy_entities) do
-		entity_settings[entity_name] = nil
-	end
-end
-
-local function add_toxic_enemies_to_planet(planet_name)
-	local planet = data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	planet.pollutant_type = planet.pollutant_type or "pollution"
-	enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
-	map_gen_settings.autoplace_controls = map_gen_settings.autoplace_controls or {}
-	map_gen_settings.autoplace_controls[toxic_enemy_control] = {
-		frequency = 1,
-		size = 1,
-		richness = 1
-	}
-
-	map_gen_settings.autoplace_settings = map_gen_settings.autoplace_settings or {}
-	map_gen_settings.autoplace_settings.entity = map_gen_settings.autoplace_settings.entity or {}
-	map_gen_settings.autoplace_settings.entity.settings = map_gen_settings.autoplace_settings.entity.settings or {}
-
-	for _, entity_name in pairs(toxic_enemy_entities) do
-		if toxic_entity_exists(entity_name) then
-			map_gen_settings.autoplace_settings.entity.settings[entity_name] = {}
-		end
-	end
-end
-
-restrict_entity_to_toxic_tiles("unit-spawner", "toxic-biter-spawner")
-restrict_entity_to_toxic_tiles("turret", "small-toxic-worm-turret")
-restrict_entity_to_toxic_tiles("turret", "medium-toxic-worm-turret")
-restrict_entity_to_toxic_tiles("turret", "big-toxic-worm-turret")
-restrict_entity_to_toxic_tiles("turret", "behemoth-toxic-worm-turret")
-restrict_entity_to_toxic_tiles("turret", "leviathan-toxic-worm-turret")
-restrict_entity_to_toxic_tiles("turret", "mother-toxic-worm-turret")
-
-remove_toxic_enemies_from_planet("nauvis")
-remove_toxic_enemies_from_planet("vulcanus")
 
 for _, planet_name in pairs(toxic_planets) do
-	add_toxic_enemies_to_planet(planet_name)
+	enemy_autoplace.add_entities_to_planet(planet_name, toxic_enemy_entities, toxic_enemy_control)
 end

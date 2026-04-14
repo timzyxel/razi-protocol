@@ -65,7 +65,7 @@ Razi Protocol moves several enemy mods away from Nauvis-style generic spawning a
 - Arachnids spawn on Arig, Nexus, and Crucible.
 - Armoured biters spawn on Panglia, Hyarion, Nexus, and Crucible.
 - Cold biters spawn on Aquilo, Paracelsin, Frozeta, Cerys, and Nexus.
-- Electric flying enemies spawn on Corrundum and Nexus, in addition to their original Fulgora behavior from the source mod.
+- Electric flying enemies spawn on Corrundum, Ribbonia, and Nexus, in addition to their original Fulgora behavior from the source mod.
 - Explosive biters spawn on Moshine and Nexus.
 - Toxic biters spawn on Cubium, Vesta, Nexus, and Crucible.
 

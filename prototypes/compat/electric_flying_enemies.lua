@@ -20,6 +20,13 @@ local electric_enemy_tiles = {
 	"fulgoran-machinery",
 	"oil-ocean-shallow",
 	"oil-ocean-deep",
+	"ribbonia-dust",
+	"ribbonia-rock",
+	"ribbonia-conduit",
+	"ribbonia-machinery",
+	"ribbonia-platform",
+	"ribbonia-oil-ocean-shallow",
+	"ribbonia-oil-ocean-deep",
 	"corrundum-dunes",
 	"corrundum-sand",
 	"petroleum-tile",
@@ -52,6 +59,12 @@ local explicit_electric_spawners = {
 	"unit-replicator"
 }
 
+local electric_planets = {
+	"corrundum",
+	"ribbonia",
+	"nexus"
+}
+
 local function entity_exists(entity_name)
 	return data.raw["unit-spawner"] and data.raw["unit-spawner"][entity_name]
 end
@@ -76,22 +89,11 @@ local function add_unique(values, value)
 	table.insert(values, value)
 end
 
-local function existing_tiles(tile_names)
-	local tiles = {}
-	for _, tile_name in pairs(tile_names) do
-		if data.raw.tile and data.raw.tile[tile_name] then
-			table.insert(tiles, tile_name)
-		end
-	end
-
-	return tiles
-end
-
 local function extend_tile_restriction(spawner)
 	spawner.autoplace = spawner.autoplace or {}
 	spawner.autoplace.tile_restriction = spawner.autoplace.tile_restriction or {}
 
-	for _, tile_name in pairs(existing_tiles(electric_enemy_tiles)) do
+	for _, tile_name in pairs(enemy_autoplace.existing_tiles(electric_enemy_tiles)) do
 		add_unique(spawner.autoplace.tile_restriction, tile_name)
 	end
 end
@@ -120,28 +122,12 @@ local function add_electric_enemies_to_planet(planet_name, spawners)
 		return
 	end
 
-	local planet = data.raw.planet and data.raw.planet[planet_name]
-	local map_gen_settings = planet and planet.map_gen_settings
-	if not map_gen_settings then
-		return
-	end
-
-	planet.pollutant_type = planet.pollutant_type or "pollution"
-	enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
-
-	map_gen_settings.autoplace_controls = map_gen_settings.autoplace_controls or {}
-	map_gen_settings.autoplace_settings = map_gen_settings.autoplace_settings or {}
-	map_gen_settings.autoplace_settings.entity = map_gen_settings.autoplace_settings.entity or {}
-	map_gen_settings.autoplace_settings.entity.settings = map_gen_settings.autoplace_settings.entity.settings or {}
-
 	for entity_name, spawner in pairs(spawners) do
 		local control = spawner.autoplace and spawner.autoplace.control or "enemy-base"
-		map_gen_settings.autoplace_controls[control] = {
-			frequency = 1,
-			size = 1,
-			richness = 1
-		}
-		map_gen_settings.autoplace_settings.entity.settings[entity_name] = {}
+		local entity_settings = enemy_autoplace.prepare_custom_enemy_planet(planet_name, control)
+		if entity_settings then
+			entity_settings[entity_name] = {}
+		end
 	end
 end
 
@@ -151,5 +137,6 @@ for _, spawner in pairs(electric_spawners) do
 	extend_tile_restriction(spawner)
 end
 
-add_electric_enemies_to_planet("corrundum", electric_spawners)
-add_electric_enemies_to_planet("nexus", electric_spawners)
+for _, planet_name in pairs(electric_planets) do
+	add_electric_enemies_to_planet(planet_name, electric_spawners)
+end

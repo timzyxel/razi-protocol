@@ -8,6 +8,17 @@ local armoured_biter_units = {
 	["leviathan-armoured-biter"] = true
 }
 
+local armoured_planets = {
+	"panglia",
+	"hyarion",
+	"nexus",
+	"crucible"
+}
+
+local armoured_enemy_entities = {
+	"armoured-biter-spawner"
+}
+
 local armoured_biter_tiles = {
 	"panglia-volcanic-soil-dark",
 	"panglia-volcanic-soil-light",
@@ -91,37 +102,19 @@ local function remove_armoured_units_from_spawner(spawner)
 	spawner.result_units = result_units
 end
 
-local function add_spawner_to_planet(planet_name, spawner_name)
-	local planet = data.raw.planet[planet_name]
-	if not planet or not planet.map_gen_settings then
-		return
-	end
-
-	local map_gen_settings = planet.map_gen_settings
-	enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
-	map_gen_settings.autoplace_controls = map_gen_settings.autoplace_controls or {}
-	map_gen_settings.autoplace_controls["enemy-base"] = {
-		frequency = 1,
-		size = 1,
-		richness = 1
-	}
-
-	map_gen_settings.autoplace_settings = map_gen_settings.autoplace_settings or {}
-	map_gen_settings.autoplace_settings.entity = map_gen_settings.autoplace_settings.entity or {}
-	map_gen_settings.autoplace_settings.entity.settings = map_gen_settings.autoplace_settings.entity.settings or {}
-	map_gen_settings.autoplace_settings.entity.settings[spawner_name] = {}
+local function armoured_spawner_exists(entity_name)
+	return enemy_autoplace.entity_exists("unit-spawner", entity_name)
 end
 
-local armoured_spawner = data.raw["unit-spawner"]["armoured-biter-spawner"]
+local armoured_spawner = enemy_autoplace.entity_exists("unit-spawner", "armoured-biter-spawner")
 
-remove_armoured_units_from_spawner(data.raw["unit-spawner"]["biter-spawner"])
+remove_armoured_units_from_spawner(enemy_autoplace.entity_exists("unit-spawner", "biter-spawner"))
 
 if armoured_spawner then
 	armoured_spawner.autoplace = armoured_spawner.autoplace or {}
-	armoured_spawner.autoplace.tile_restriction = armoured_biter_tiles
+	armoured_spawner.autoplace.tile_restriction = enemy_autoplace.existing_tiles(armoured_biter_tiles)
 
-	add_spawner_to_planet("panglia", "armoured-biter-spawner")
-	add_spawner_to_planet("hyarion", "armoured-biter-spawner")
-	add_spawner_to_planet("nexus", "armoured-biter-spawner")
-	add_spawner_to_planet("crucible", "armoured-biter-spawner")
+	for _, planet_name in pairs(armoured_planets) do
+		enemy_autoplace.add_entities_to_planet(planet_name, armoured_enemy_entities, "enemy-base", armoured_spawner_exists)
+	end
 end
