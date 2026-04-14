@@ -108,5 +108,6 @@ It also supports a number of optional quality-of-life and compatibility mods. Se
 ## Credits
 
 Razi Protocol exists because of the Factorio modding community. The original planets, enemies, mechanics, concepts, art, sounds, and icons belong to their respective authors and contributors.
+Huge thank you to the Foundry Discord server for all there help in creating this mod.
 
 Please see `Credits.txt` for the full acknowledgement list. If you are a mod author and want credit adjusted, wording changed, or something removed, please contact Raziphel on Discord.
