@@ -7,10 +7,10 @@ PlanetsLib:extend({
         orbit = {
             parent = {
                 type = "space-location",
-                name = "nyxaris",
+                name = "star",
             },
-            distance = 90,
-            orientation = 0.75,
+            distance = 80,
+            orientation = 0.54,
         },
         sprite_only = true,
         magnitude = 20,
@@ -43,7 +43,7 @@ PlanetsLib:extend({
 PlanetsLib:update({
 	{
 		type = "planet",
-		name = "tenebris",
+		name = "ribbonia",
 		orbit = {
 			parent = {
 				type = "space-location",
@@ -173,13 +173,17 @@ deleteRoute("sye-vibrant-maraxsis")
 deleteRoute("vulcanus-rubia")
 deleteRoute("gleba-rubia")
 deleteRoute("corrundum-rubia")
+deleteRoute("nauvis-ribbonia")
+deleteRoute("sye-beetlejuice-ribbonia")
+deleteRoute("cubium-ribbonia")
+deleteRoute("ribbonia-crucible-orbit")
 
 data:extend({
 	{
 		type = "space-connection",
-		name = "sye-vibrant-tenebris",
+		name = "sye-vibrant-ribbonia",
 		from = "sye-vibrant",
-		to = "tenebris",
+		to = "ribbonia",
 		length = 20000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
 	},
@@ -215,10 +219,10 @@ data:extend({
 		length = 7500,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
 	},
-    {
+	{
 		type = "space-connection",
-		name = "tenebris-paracelsin",
-		from = "tenebris",
+		name = "ribbonia-paracelsin",
+		from = "ribbonia",
 		to = "paracelsin",
 		length = 40000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)

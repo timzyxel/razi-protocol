@@ -173,7 +173,7 @@ data:extend({
 			}
 		},
 		prerequisites = {
-			"system-discovery-dea-dia"
+			"planet-discovery-corrundum"
 		},
 		unit = {
 			count = 1000,

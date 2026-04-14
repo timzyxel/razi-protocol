@@ -1,7 +1,10 @@
 local science_tab = {}
 
 local function ensure_item_subgroup(name, group, order)
-	if data.raw["item-subgroup"] and data.raw["item-subgroup"][name] then
+	local subgroup = data.raw["item-subgroup"] and data.raw["item-subgroup"][name]
+	if subgroup then
+		subgroup.group = group or subgroup.group
+		subgroup.order = order or subgroup.order
 		return
 	end
 
@@ -111,8 +114,18 @@ function science_tab.data_final_fixes()
 	local science_group = data.raw["item-group"].science
 	science_group.order = "fz[science]"
 
+	ensure_item_subgroup("system-tech-card", "science", "0[system-tech-card]")
 	ensure_item_subgroup("planet-science-pack", "science", "9[planet-science]")
 	ensure_item_subgroup("research-data", "science", "1[research-data]")
+
+	local system_tech_cards = {
+		"calidus-tech-card",
+		"solaris-tech-card",
+		"nyxaris-tech-card",
+		"vibrant-tech-card",
+		"beetlejuice-tech-card",
+		"deep-space-tech-card"
+	}
 
 	local planet_science_packs = {
 		"bioluminescent-science-pack",
@@ -129,6 +142,10 @@ function science_tab.data_final_fixes()
 		"electromagnetic-science-pack",
 		"promethium-science-pack"
 	}
+
+	for _, pack in ipairs(system_tech_cards) do
+		move_science_pack(pack, "system-tech-card")
+	end
 
 	for _, pack in ipairs(planet_science_packs) do
 		move_science_pack(pack, "planet-science-pack")

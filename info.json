@@ -4,7 +4,7 @@
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
-	"description": "A giant modpack mod made to combine many great mods and bridge all the mods together for a much better expierence!\n\nPlease read mod page.",
+	"description": "A giant Space Age modpack bridge that connects many planet, science, enemy, and endgame mods into one coherent progression route across multiple star systems.\n\nSee the mod page or README for the full overview and credits.",
 	"factorio_version": "2.0",
 	"dependencies": [
 		"base",
@@ -27,10 +27,12 @@
 		"secretas",
 		"maraxsis",
 		"rubia",
+		"Nexus",
 		"VoidProcessing",
 		"skewer_planet_vesta",
 		"castra",
 		"planet-crucible",
+		"ribbonia",
 		"slp-dyson-sphere-reworked",
 
 		"Arachnids_enemy",
@@ -81,8 +83,10 @@
 		"? LithiumBattery",
 		"? CircularColliderLab",
 		"? Quality-Asteroids-Expanded",
-		"? cargo-bay-inserters",
+        "? cargo-bay-inserters",
 
+		"! krastorio2_extended_endgame",
+		"! K2_spaced_out_extended_endgame",
         "! tile-upgrade-planner",
         "! quality-rocket-parts",
         "! MT-lib",

@@ -11,7 +11,7 @@ PlanetsLib:extend({
                 type = "space-location",
                 name = "star",
             },
-            distance = 80,
+            distance = 75,
             orientation = 0.18,
         },
         sprite_only = true,
@@ -128,48 +128,6 @@ PlanetsLib:update({
 	},
 })
 
-
--- -----------------------------
--- MOVE DIA DEA TO ITS OWN SPOT
--- -----------------------------
-
--- Put Dea Dia in its own spot!
-PlanetsLib:update({
-	{
-		type = "space-location",
-		name = "star-dea-dia",
-		orbit = {
-			parent = {
-				type = "space-location",
-				name = "solaris",
-			},
-			distance = 50,
-			orientation = 0.48,
-        -- sprite = {
-        --         type = "sprite",
-        --         filename = "__razi-protocol__/graphics/orbits/orbit_.png",
-        --         size = 2621,
-        --     },
-		},
-	},
-})
-
-PlanetsLib:update({
-	{
-		type = "space-location",
-		name = "dea-dia-system-edge",
-        localised_name = "Dea Dia Slip Stream",
-		orbit = {
-			parent = {
-				type = "space-location",
-				name = "star-dea-dia",
-			},
-			distance = 10,
-			orientation = 0.58,
-		},
-	},
-})
-
 require("util")
 local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 local castra_asteroids = asteroid_util.vulcanus_castra or asteroid_util.nauvis_fulgora
@@ -245,25 +203,5 @@ data:extend({
 		to = "corrundum",
 		length = 15000,
 		-- asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
-	},
-})
-data:extend({
-	{
-		type = "space-connection",
-		name = "sye-calidus-dea-dia-system-edge",
-		from = "sye-calidus",
-		to = "dea-dia-system-edge",
-		length = 15000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
-	},
-})
-data:extend({
-	{
-		type = "space-connection",
-		name = "dea-dia-system-edge-lemures",
-		from = "dea-dia-system-edge",
-		to = "lemures",
-		length = 3000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
 	},
 })

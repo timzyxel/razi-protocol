@@ -7,10 +7,10 @@ PlanetsLib:extend({
         orbit = {
             parent = {
                 type = "space-location",
-                name = "vibrant",
+                name = "star",
             },
             distance = 75,
-            orientation = 0.85,
+            orientation = 0.72,
         },
         sprite_only = true,
         magnitude = 25,
@@ -30,7 +30,7 @@ PlanetsLib:extend({
                 name = "beetlejuice",
             },
             distance = 25,
-            orientation = 0.25,
+            orientation = 0.3,
             sprite = {
                 type = "sprite",
                 filename = "__razi-protocol__/graphics/orbits/orbit_25.png",
@@ -52,7 +52,7 @@ PlanetsLib:update({
 				name = "beetlejuice",
 			},
 			distance = 21,
-			orientation = 0.6,
+			orientation = 0.21,
 			sprite = {
 				type = "sprite",
 				filename = "__razi-protocol__/graphics/orbits/orbit_21.png",
@@ -76,6 +76,25 @@ PlanetsLib:update({
 				type = "sprite",
 				filename = "__razi-protocol__/graphics/orbits/orbit_23.png",
 				size = 1884,
+			},
+		},
+	},
+	{
+		type = "planet",
+		name = "tenebris",
+		distance = nil,
+		orientation = nil,
+		orbit = {
+			parent = {
+				type = "space-location",
+				name = "beetlejuice",
+			},
+			distance = 22,
+			orientation = 0.6,
+			sprite = {
+				type = "sprite",
+				filename = "__razi-protocol__/graphics/orbits/orbit_22.png",
+				size = 1802,
 			},
 		},
 	},
@@ -175,21 +194,34 @@ deleteRoute("vesta-solar-system-edge")
 deleteRoute("nauvis-crucible")
 deleteRoute("crucible-vulcanus")
 deleteRoute("crucible-maraxsis")
+deleteRoute("sye-vibrant-tenebris")
+deleteRoute("tenebris-paracelsin")
+deleteRoute("crucible-orbit-cubium")
+deleteRoute("sye-beetlejuice-vesta")
+deleteRoute("sye-beetlejuice-aquilo")
 
 data:extend({
 	{
 		type = "space-connection",
-		name = "sye-beetlejuice-vesta",
+		name = "sye-beetlejuice-cubium",
 		from = "sye-beetlejuice",
-		to = "vesta",
+		to = "cubium",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
-		name = "crucible-orbit-cubium",
-		from = "crucible-orbit",
-		to = "cubium",
+		name = "cubium-aquilo",
+		from = "cubium",
+		to = "aquilo",
+		length = 15000,
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
+	},
+	{
+		type = "space-connection",
+		name = "tenebris-crucible-orbit",
+		from = "tenebris",
+		to = "crucible-orbit",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
@@ -203,9 +235,9 @@ data:extend({
 	},
 	{
 		type = "space-connection",
-		name = "sye-beetlejuice-aquilo",
+		name = "sye-beetlejuice-vesta",
 		from = "sye-beetlejuice",
-		to = "aquilo",
+		to = "vesta",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_aquilo)
 	},

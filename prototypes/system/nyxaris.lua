@@ -7,14 +7,47 @@ PlanetsLib:extend({
         orbit = {
             parent = {
                 type = "space-location",
-                name = "star-dea-dia",
+                name = "star",
             },
-            distance = 60,
-            orientation = 0.5,
+            distance = 75,
+            orientation = 0.36,
         },
         sprite_only = true,
         magnitude = 12,
     },
+})
+
+PlanetsLib:update({
+	{
+		type = "space-location",
+		name = "star-dea-dia",
+		orbit = {
+			parent = {
+				type = "space-location",
+				name = "nyxaris",
+			},
+			distance = 32,
+			orientation = 0.08,
+			sprite = {
+				type = "sprite",
+				filename = "__razi-protocol__/graphics/orbits/orbit_0.png",
+				size = 369,
+			},
+		},
+	},
+	{
+		type = "space-location",
+		name = "dea-dia-system-edge",
+		localised_name = "Dea Dia Slip Stream",
+		orbit = {
+			parent = {
+				type = "space-location",
+				name = "star-dea-dia",
+			},
+			distance = 10,
+			orientation = 0.58,
+		},
+	},
 })
 
 PlanetsLib:extend({
@@ -129,8 +162,25 @@ deleteRoute("star-pelagos")
 deleteRoute("pelagos-corrundum")
 deleteRoute("maraxsis-pelagos")
 deleteRoute("pelagos-aquilo")
+deleteRoute("sye-calidus-dea-dia-system-edge")
 
 data:extend({
+	{
+		type = "space-connection",
+		name = "sye-nyxaris-dea-dia-system-edge",
+		from = "sye-nyxaris",
+		to = "dea-dia-system-edge",
+		length = 15000,
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+	},
+	{
+		type = "space-connection",
+		name = "dea-dia-system-edge-lemures",
+		from = "dea-dia-system-edge",
+		to = "lemures",
+		length = 3000,
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+	},
 	{
 		type = "space-connection",
 		name = "sye-nyxaris-apia-carnova-orbit",
