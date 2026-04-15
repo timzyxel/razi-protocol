@@ -1,6 +1,6 @@
 {
 	"name": "razi-protocol",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
@@ -76,7 +76,6 @@
 		"? aai-industry",
 		"? assembler-group",
 		"? AutoDeconstruct",
-		"? combat-mechanics-overhaul",
 		"? enemy-alert",
 		"? UPSFriendlyNixieTubeDisplay",
 		"? rocket-reusability",
