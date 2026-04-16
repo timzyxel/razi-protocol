@@ -83,10 +83,12 @@
 		"? LithiumBattery",
 		"? CircularColliderLab",
 		"? Quality-Asteroids-Expanded",
-        "? cargo-bay-inserters",
+		"? cargo-bay-inserters",
 
 		"! krastorio2_extended_endgame",
 		"! K2_spaced_out_extended_endgame",
+		"! lignumis",
+		"! lignumis-cf",
         "! tile-upgrade-planner",
         "! quality-rocket-parts",
         "! MT-lib",

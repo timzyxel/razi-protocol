@@ -103,7 +103,7 @@ Razi Protocol includes compatibility logic for:
 
 Razi Protocol is designed around a large dependency set. Major content mods include Krastorio2 Spaced Out, PlanetsLib, Muluna, the Planetaris planet set, Cerys, Dea Dia, Corrundum, Apia, Moshine, Panglia, Pelagos, Tenebris Prime, Secretas, Maraxsis, Rubia, Nexus, Void Processing, Vesta, Castra, Crucible, Ribbonia, Dyson Sphere Reworked, and several enemy mods.
 
-It also supports a number of optional quality-of-life and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods.
+It also supports a number of optional quality-of-life and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods. Lignumis is also marked as incompatible for now because the full Razi Protocol pack already sits too close to that same collision-layer cap.
 
 ## Credits
 

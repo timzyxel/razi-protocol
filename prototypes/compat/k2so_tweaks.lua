@@ -67,6 +67,48 @@ local function remove_xy_k2so_placeholder_connections()
 	data.raw["space-connection"]["moshine-maraxsis"] = nil
 end
 
+local function item_exists(name)
+	return
+		(data.raw.item and data.raw.item[name]) or
+		(data.raw.ammo and data.raw.ammo[name]) or
+		(data.raw.tool and data.raw.tool[name])
+end
+
+local function entry_name(entry)
+	return entry and (entry.name or entry[1])
+end
+
+local function set_entry_name(entry, name)
+	if entry.name then
+		entry.name = name
+	else
+		entry[1] = name
+	end
+end
+
+local function replace_recipe_ingredient(recipe_name, from, to)
+	local recipe = data.raw.recipe and data.raw.recipe[recipe_name]
+	if not recipe then
+		return
+	end
+
+	for _, ingredient in pairs(recipe.ingredients or {}) do
+		if entry_name(ingredient) == from then
+			set_entry_name(ingredient, to)
+		end
+	end
+end
+
+local function fix_corrosive_magazine_without_k2_rifles()
+	if item_exists("kr-rifle-magazine") or not item_exists("firearm-magazine") then
+		return
+	end
+
+	-- nulls-k2so-tweaks upgrades Pelagos' corrosive ammo to use K2 rifle
+	-- magazines. K2SO only creates those when realistic weapons are enabled.
+	replace_recipe_ingredient("corrosive-firearm-magazine", "kr-rifle-magazine", "firearm-magazine")
+end
+
 function compat.data()
 	patch_xy_k2so_globals()
 	add_xy_k2so_placeholder_connections()
@@ -75,6 +117,10 @@ end
 function compat.data_updates()
 	patch_xy_k2so_globals()
 	remove_xy_k2so_placeholder_connections()
+end
+
+function compat.data_final_fixes()
+	fix_corrosive_magazine_without_k2_rifles()
 end
 
 return compat
