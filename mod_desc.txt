@@ -23,7 +23,7 @@ The mod adds a new system-based progression structure, reorganizes where many pl
 
 Razi Protocol treats the run like a series of chapters.
 
-Calidus is the inner-system and base Space Age foundation. It includes the normal base and Space Age sciences, plus early inner-system worlds such as Terra Palus, Muluna, and Cerys. The Calidus Tech Card compresses that early foundation into a card used by later progression.
+Calidus is the inner-system and base Space Age foundation. It includes the normal base and Space Age sciences, plus early inner-system worlds such as Muluna and Cerys. The Calidus Tech Card compresses that early foundation into a card used by later progression.
 
 Solaris is the first major custom system layer. It brings in Castra, Arig, Hyarion, Tellus, and Corrundum as a connected branch. Its card combines the Solaris-tier science packs, including battlefield, Planetaris, and electrochemical style science.
 
@@ -75,7 +75,7 @@ On planets where Razi Protocol assigns custom enemies, it also suppresses vanill
 
 The mod adds or moves many locations and routes with PlanetsLib. The current route is roughly:
 
-- Calidus slipstream connects the early star region to Terra Palus and the custom systems.
+- Calidus slipstream connects the early star region to the custom systems.
 - Solaris contains Castra, Arig, Hyarion, Tellus, and Corrundum.
 - Nyxaris contains the Nyxaris slipstream, Dea Dia system access, Apia Carnova, Moshine, Panglia, and Pelagos.
 - Vibrant contains Ribbonia, Paracelsin, Secretas, Frozeta, Rubia, and Maraxsis.
