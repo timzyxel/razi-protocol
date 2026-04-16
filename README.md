@@ -23,7 +23,7 @@ The mod adds a new system-based progression structure, reorganizes where many pl
 
 Razi Protocol treats the run like a series of chapters.
 
-Calidus is the inner-system and base Space Age foundation. It includes the normal base and Space Age sciences, plus early inner-system sciences such as Muluna and Cerys style science packs. The Calidus Tech Card compresses that early foundation into a card used by later progression.
+Calidus is the inner-system and base Space Age foundation. It includes the normal base and Space Age sciences, plus early inner-system worlds such as Terra Palus, Muluna, and Cerys. The Calidus Tech Card compresses that early foundation into a card used by later progression.
 
 Solaris is the first major custom system layer. It brings in Castra, Arig, Hyarion, Tellus, and Corrundum as a connected branch. Its card combines the Solaris-tier science packs, including battlefield, Planetaris, and electrochemical style science.
 
@@ -75,7 +75,7 @@ On planets where Razi Protocol assigns custom enemies, it also suppresses vanill
 
 The mod adds or moves many locations and routes with PlanetsLib. The current route is roughly:
 
-- Calidus slipstream connects the early star region to the custom systems.
+- Calidus slipstream connects the early star region to Terra Palus and the custom systems.
 - Solaris contains Castra, Arig, Hyarion, Tellus, and Corrundum.
 - Nyxaris contains the Nyxaris slipstream, Dea Dia system access, Apia Carnova, Moshine, Panglia, and Pelagos.
 - Vibrant contains Ribbonia, Paracelsin, Secretas, Frozeta, Rubia, and Maraxsis.
@@ -95,13 +95,14 @@ Razi Protocol includes compatibility logic for:
 - Science Tab grouping and lab input fixes.
 - xy-k2so-enhancements route assumptions around Moshine.
 - nulls-k2so-tweaks and related K2SO tuning dependencies.
+- Maraxsis and K2SO electric mining drill collision masks, keeping drill upgrades valid after Maraxsis adds underwater build rules.
 - Tellus' `adjust-maraxsis` setting, which is forced off so Maraxsis stays in the Razi Protocol layout.
 - Bioluminescent prototype load issues from missing place results or next-upgrade targets.
 - Multiple enemy mods that otherwise try to spawn on Nauvis or generic planet tiles.
 
 ## Major Required Content Mods
 
-Razi Protocol is designed around a large dependency set. Major content mods include Krastorio2 Spaced Out, PlanetsLib, Muluna, the Planetaris planet set, Cerys, Dea Dia, Corrundum, Apia, Moshine, Panglia, Pelagos, Tenebris Prime, Secretas, Maraxsis, Rubia, Nexus, Void Processing, Vesta, Castra, Crucible, Ribbonia, Dyson Sphere Reworked, and several enemy mods.
+Razi Protocol is designed around a large dependency set. Major content mods include Krastorio2 Spaced Out, PlanetsLib, Terra Palus, Muluna, the Planetaris planet set, Cerys, Dea Dia, Corrundum, Apia, Moshine, Panglia, Pelagos, Tenebris Prime, Secretas, Maraxsis, Rubia, Nexus, Void Processing, Vesta, Castra, Crucible, Ribbonia, Dyson Sphere Reworked, and several enemy mods.
 
 It also supports a number of optional quality-of-life and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods. Lignumis is also marked as incompatible for now because the full Razi Protocol pack already sits too close to that same collision-layer cap.
 

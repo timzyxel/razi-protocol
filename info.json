@@ -1,6 +1,6 @@
 {
 	"name": "razi-protocol",
-	"version": "1.0.5",
+	"version": "1.1.0",
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
@@ -17,6 +17,7 @@
 		"planetaris-hyarion",
 		"planetaris-arig",
 		"Cerys-Moon-of-Fulgora",
+		"terrapalus",
 		"dea-dia-system",
 		"corrundum",
 		"apia",
@@ -43,7 +44,6 @@
 		"Explosive_biters",
 		"Toxic_biters",
 		"celestial-weather",
-		"k2-wind-turbine-speed",
 		"paracelsin-krastorio-compatibility-plus",
 		"Imersite-Asteroids",
 	    "nulls-k2so-tweaks",
@@ -87,6 +87,7 @@
 
 		"! krastorio2_extended_endgame",
 		"! K2_spaced_out_extended_endgame",
+		"! maraxis-k2so-collision-mask-fix-fix",
 		"! lignumis",
 		"! lignumis-cf",
         "! tile-upgrade-planner",
