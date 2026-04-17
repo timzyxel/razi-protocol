@@ -118,7 +118,6 @@ local card_definitions = {
 		},
 		ingredients = {
 			"beetlejuice-tech-card",
-			"kr-singularity-tech-card",
 			"promethium-science-pack",
 			"promethium-882-science-pack"
 		}

@@ -8,5 +8,8 @@ require("prototypes.compat.nexus_endgame").data_final_fixes()
 require("prototypes.compat.science_tab").data_final_fixes()
 require("prototypes.compat.k2so_tweaks").data_final_fixes()
 require("prototypes.compat.maraxsis_k2so_collision").data_final_fixes()
+require("prototypes.compat.progression_polish").data_final_fixes()
+require("prototypes.compat.prototype_identity").data_final_fixes()
+require("prototypes.compat.logistics_cleanup").data_final_fixes()
 
 deleteRoute("crucible-maraxsis") -- FUCK THIS ROUTE JESUS CHRIST.
