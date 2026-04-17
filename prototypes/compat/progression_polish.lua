@@ -60,34 +60,47 @@ local function remove_recipe_ingredient(recipe_name, ingredient_to_remove)
 	end
 end
 
-local function normalize_muluna_green_plastic()
+local function restore_muluna_green_plastic_gate()
 	local green_plastic = technology("muluna-nanofoamed-polymers")
 	if not green_plastic then
 		return
 	end
 
-	-- Muluna can pull in discovery techs from other planet packs here. I only
-	-- want green plastic to read as a Muluna/early-space material.
+	-- Muluna wants this after a few planetary breakthroughs. Keep the list
+	-- readable, but do not let it become a same-planet early unlock.
 	green_plastic.enabled = true
 	green_plastic.visible_when_disabled = nil
-	green_plastic.prerequisites = {"asteroid-collector"}
+	green_plastic.prerequisites = {"space-science-pack"}
 	add_prerequisite(green_plastic, "planet-discovery-muluna")
+	add_prerequisite(green_plastic, "metallurgic-science-pack")
+	add_prerequisite(green_plastic, "electromagnetic-science-pack")
+	add_prerequisite(green_plastic, "agricultural-science-pack")
 
 	local ingredients = science_ingredients({
 		"automation-science-pack",
 		"logistic-science-pack",
 		"chemical-science-pack",
-		"space-science-pack"
+		"production-science-pack",
+		"utility-science-pack",
+		"space-science-pack",
+		"metallurgic-science-pack",
+		"electromagnetic-science-pack",
+		"agricultural-science-pack"
 	})
 
 	if #ingredients > 0 then
 		green_plastic.research_trigger = nil
 		green_plastic.unit = {
-			count = 500,
-			time = 45,
+			count = 1000,
+			time = 60,
 			ingredients = ingredients
 		}
 	end
+
+	green_plastic.localised_description = {
+		"",
+		"Unlocks Muluna's nanofoamed polymer chain after combining Vulcanus, Fulgora, Gleba, and Muluna material science."
+	}
 end
 
 local function clarify_long_stack_inserters()
@@ -117,6 +130,18 @@ local function move_singularity_card_out_of_early_deep_space()
 	-- cards should stay in the transceiver finale, not sneak into this earlier
 	-- recipe and make the tree look like the ending starts too soon.
 	remove_recipe_ingredient("deep-space-tech-card", "kr-singularity-tech-card")
+end
+
+local function loosen_matter_research_data_surface()
+	local matter_data = recipe("kr-matter-research-data")
+	if not matter_data then
+		return
+	end
+
+	-- K2SO 1.6 moved this onto Aquilo pressure only. Razi moves Aquilo deep
+	-- into Beetlejuice, so the data recipe needs to follow the broader K2SO
+	-- matter route instead of hard-locking one planet.
+	matter_data.surface_conditions = nil
 end
 
 local function spawn_definition_key(definition)
@@ -162,10 +187,11 @@ local function add_imersite_to_far_space()
 	-- Imersite belongs in the ugly late-space routes too.
 	for _, connection_name in ipairs({
 		"sye-beetlejuice-cubium",
-		"cubium-aquilo",
+		"cubium-vesta",
+		"vesta-aquilo",
+		"sye-beetlejuice-tenebris",
 		"tenebris-crucible-orbit",
 		"crucible-orbit-vesta",
-		"sye-beetlejuice-vesta",
 		"aquilo-solar-system-edge"
 	}) do
 		append_spawn_definitions(data.raw["space-connection"] and data.raw["space-connection"][connection_name], inner_belt)
@@ -191,9 +217,10 @@ local function add_imersite_to_far_space()
 end
 
 function progression_polish.data_final_fixes()
-	normalize_muluna_green_plastic()
+	restore_muluna_green_plastic_gate()
 	clarify_long_stack_inserters()
 	move_singularity_card_out_of_early_deep_space()
+	loosen_matter_research_data_surface()
 	add_imersite_to_far_space()
 end
 

@@ -197,6 +197,8 @@ deleteRoute("crucible-maraxsis")
 deleteRoute("sye-vibrant-tenebris")
 deleteRoute("tenebris-paracelsin")
 deleteRoute("crucible-orbit-cubium")
+deleteRoute("sye-beetlejuice-tenebris")
+deleteRoute("cubium-vesta")
 deleteRoute("sye-beetlejuice-vesta")
 deleteRoute("sye-beetlejuice-aquilo")
 
@@ -211,9 +213,25 @@ data:extend({
 	},
 	{
 		type = "space-connection",
-		name = "cubium-aquilo",
+		name = "cubium-vesta",
 		from = "cubium",
+		to = "vesta",
+		length = 15000,
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
+	},
+	{
+		type = "space-connection",
+		name = "vesta-aquilo",
+		from = "vesta",
 		to = "aquilo",
+		length = 15000,
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_aquilo)
+	},
+	{
+		type = "space-connection",
+		name = "sye-beetlejuice-tenebris",
+		from = "sye-beetlejuice",
+		to = "tenebris",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
@@ -229,14 +247,6 @@ data:extend({
 		type = "space-connection",
 		name = "crucible-orbit-vesta",
 		from = "crucible-orbit",
-		to = "vesta",
-		length = 15000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_aquilo)
-	},
-	{
-		type = "space-connection",
-		name = "sye-beetlejuice-vesta",
-		from = "sye-beetlejuice",
 		to = "vesta",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_aquilo)

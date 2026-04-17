@@ -13,14 +13,18 @@ Date: 17. 04. 2026
 
   Changes:
     - Removed the K2SO Singularity Tech Card ingredient from the Deep Space Tech Card recipe so singularity science stays in the final transceiver chain instead of appearing too early.
-    - Cleaned up Muluna green plastic research so it no longer pulls in confusing unrelated planet requirements.
+    - Reworked Muluna green plastic research so it still requires several Space Age planets, but no longer pulls in confusing unrelated modded planet requirements.
     - Added Rubia's long stack inserter dependency on Moshine's normal long stack inserter when both technologies exist.
     - Added Imersite asteroid spawns to late Beetlejuice and Deep Space routes so Imersite is no longer effectively locked around Fulgora.
     - Kept Terra Palus as a required content mod while leaving its route alone, since it is handled as a moon of Gleba by its source mod.
+    - Split Beetlejuice progression into clearer branches: Cubium leads through Vesta to Aquilo, while Tenebris leads into Crucible.
 
   Bugfixes:
     - Integrated the Maraxsis/K2SO collision-mask drill compatibility behavior directly into Razi Protocol and marked the standalone fix-fix mod as incompatible.
     - Fixed late-game Deep Space card recipe clutter caused by the Singularity Tech Card appearing before the intended finale.
+    - Fixed Muluna green plastic becoming researchable with only Muluna and early space science.
+    - Fixed K2SO 1.6 Matter research data being hard-locked to Aquilo pressure only, which stranded the matter tech card in Razi's moved progression.
+    - Fixed Beetlejuice routes so Vesta sits between Cubium and Aquilo, with Tenebris and Crucible on their own side route.
     - Added final-fixes guards around several optional prototype polish changes so missing optional content does not crash data stage.
 
   Info:
