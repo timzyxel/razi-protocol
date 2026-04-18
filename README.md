@@ -110,7 +110,7 @@ Razi Protocol includes compatibility logic for:
 - Science Tab grouping and lab input fixes.
 - Vehicles & Infrastructure crafting group cleanup for overloaded logistics inventories.
 - Prototype identity polish for duplicate-looking planet logistics and power unlocks.
-- xy-k2so-enhancements route assumptions around Moshine.
+- xy-k2so-enhancements-nulls-fork route assumptions around Moshine.
 - nulls-k2so-tweaks and related K2SO tuning dependencies.
 - Maraxsis and K2SO electric mining drill collision masks, keeping drill upgrades valid after Maraxsis adds underwater build rules.
 - Imersite Asteroids route expansion so late-game Imersite asteroids can appear in Beetlejuice and Deep Space lanes instead of only feeling tied to Fulgora.

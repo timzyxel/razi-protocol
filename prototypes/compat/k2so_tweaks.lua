@@ -15,8 +15,12 @@ local xy_k2so_placeholder_connections = { -- Cuz fuckin hell xy loves to complai
 	}
 }
 
+local function xy_k2so_enhancements_active()
+	return mods["xy-k2so-enhancements-nulls-fork"] or mods["xy-k2so-enhancements"]
+end
+
 local function patch_xy_k2so_globals()
-	if mods["xy-k2so-enhancements"] and not sounds then
+	if xy_k2so_enhancements_active() and not sounds then
 		sounds = require("__base__.prototypes.entity.sounds")
 	end
 end
@@ -32,7 +36,7 @@ local function location_exists(name)
 end
 
 local function add_xy_k2so_placeholder_connections()
-	if not mods["xy-k2so-enhancements"] then
+	if not xy_k2so_enhancements_active() then
 		return
 	end
 
