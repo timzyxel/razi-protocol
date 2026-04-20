@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.5
+Date: 20. 04. 2026
+  Changes:
+    - Moved railguns and railgun ammo back into the combat tab instead of Vehicles & Infrastructure.
+    - Added a startup setting to disable Razi Protocol's enemy routing and vanilla enemy suppression changes.
+    - Made the supported enemy mods optional dependencies instead of required dependencies.
+    - Moved Aquilo into the Vibrant branch and moved Secretas/Frozeta together into the late Beetlejuice route toward deep space.
+    - Kept Secretas and Frozeta paired on the starmap, with Secretas leading into Frozeta before the solar system edge.
+    - Moved Secretas' golden science into the Beetlejuice tech card tier so system cards match the new layout.
+    - Updated the deep-space gate so Nexus, promethium, and the transceiver route follow Frozeta's new late-game position.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.1.4
 Date: 18. 04. 2026
   Changes:
@@ -25,7 +37,7 @@ Date: 17. 04. 2026
     - Added Rubia's long stack inserter dependency on Moshine's normal long stack inserter when both technologies exist.
     - Added Imersite asteroid spawns to late Beetlejuice and Deep Space routes so Imersite is no longer effectively locked around Fulgora.
     - Kept Terra Palus as a required content mod while leaving its route alone, since it is handled as a moon of Gleba by its source mod.
-    - Split Beetlejuice progression into clearer branches: Cubium leads through Vesta to Aquilo, while Tenebris leads into Crucible.
+    - Split Beetlejuice progression into clearer branches, keeping Cubium/Vesta progression separate from the Tenebris/Crucible side route.
 
   Bugfixes:
     - Integrated the Maraxsis/K2SO collision-mask drill compatibility behavior directly into Razi Protocol and marked the standalone fix-fix mod as incompatible.

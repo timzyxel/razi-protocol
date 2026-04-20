@@ -1,5 +1,9 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
 
+if not enemy_autoplace.enabled() or not mods["Toxic_biters"] then
+	return
+end
+
 local toxic_enemy_control = "enemy-base"
 
 local toxic_enemy_entities = {

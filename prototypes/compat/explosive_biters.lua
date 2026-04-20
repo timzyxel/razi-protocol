@@ -1,5 +1,9 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
 
+if not enemy_autoplace.enabled() or not mods["Explosive_biters"] then
+	return
+end
+
 local explosive_enemy_control = "hot_enemy_base"
 
 local explosive_enemy_entities = {

@@ -1,5 +1,9 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
 
+if not enemy_autoplace.enabled() or not mods["Cold_biters"] then
+	return
+end
+
 local cold_enemy_control = "frost_enemy_base"
 
 local cold_enemy_entities = {

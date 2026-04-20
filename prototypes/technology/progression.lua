@@ -43,7 +43,6 @@ local science_tiers = {
 		"rubia-biofusion-science-pack",
 		"galvanization-science-pack",
 		"paracelsin-galvanization-science-pack",
-		"golden-science-pack",
 		"hydraulic-science-pack"
 	},
 	beetlejuice = {
@@ -51,6 +50,7 @@ local science_tiers = {
 		"cryogenic-science-pack",
 		"gas-manipulation-science-pack",
 		"planet-crucible-science-pack",
+		"golden-science-pack",
 		"promethium-science-pack"
 	},
 	nexus_early = {
@@ -272,31 +272,24 @@ add_existing_prerequisites("vibrant-discovery", {
 -- Vibrant branch.
 set_prerequisites_if_exists("planet-discovery-ribbonia", {"vibrant-discovery"})
 set_prerequisites_if_exists("planet-discovery-paracelsin", {"planet-discovery-ribbonia"})
-if technology_exists("planet-discovery-frozeta") then
-	set_prerequisites_if_exists("planet-discovery-secretas", {"vibrant-discovery"})
-	set_prerequisites_if_exists("planet-discovery-frozeta", {"planet-discovery-secretas"})
-else
-	set_prerequisites_if_exists("planet-discovery-secretas", {"vibrant-discovery"})
-end
-set_prerequisites_if_exists("planet-discovery-rubia", {"planet-discovery-secretas"})
+set_prerequisites_if_exists("planet-discovery-aquilo", {"vibrant-discovery"})
+set_prerequisites_if_exists("planet-discovery-rubia", {"planet-discovery-aquilo"})
 set_first_existing_prerequisite("planet-discovery-maraxsis", {
 	"planet-discovery-rubia",
-	"planet-discovery-secretas",
+	"planet-discovery-aquilo",
 	"vibrant-discovery"
 })
 set_many_science_after({
 	"planet-discovery-ribbonia",
 	"planet-discovery-paracelsin",
-	"planet-discovery-secretas",
-	"planet-discovery-frozeta",
+	"planet-discovery-aquilo",
 	"planet-discovery-rubia",
 	"planet-discovery-maraxsis"
 }, "dea_dia_nyxaris")
 add_existing_prerequisites("beetlejuice-discovery", {
 	"planet-discovery-ribbonia",
 	"planet-discovery-paracelsin",
-	"planet-discovery-secretas",
-	"planet-discovery-frozeta",
+	"planet-discovery-aquilo",
 	"planet-discovery-rubia",
 	"planet-discovery-maraxsis"
 })
@@ -306,7 +299,8 @@ set_prerequisites_if_exists("planet-discovery-cubium", {"beetlejuice-discovery"}
 set_prerequisites_if_exists("planet-discovery-tenebris", {"beetlejuice-discovery"})
 set_prerequisites_if_exists("planet-discovery-crucible", {"planet-discovery-tenebris"})
 set_prerequisites_if_exists("planet-discovery-vesta", {"planet-discovery-cubium"})
-set_prerequisites_if_exists("planet-discovery-aquilo", {"planet-discovery-vesta"})
+set_prerequisites_if_exists("planet-discovery-secretas", {"planet-discovery-vesta"})
+set_prerequisites_if_exists("planet-discovery-frozeta", {"planet-discovery-secretas"})
 set_prerequisites_if_exists("planet-crucible-rocket-part", {"planet-crucible-science-pack"})
 remove_prerequisites_if_exists("moon-discovery-cerys", {"planet-crucible-rocket-part"})
 set_many_science_after({
@@ -314,7 +308,8 @@ set_many_science_after({
 	"planet-discovery-tenebris",
 	"planet-discovery-crucible",
 	"planet-discovery-vesta",
-	"planet-discovery-aquilo"
+	"planet-discovery-secretas",
+	"planet-discovery-frozeta"
 }, "vibrant")
 
 local ribbonia_discovery = data.raw.technology and data.raw.technology["planet-discovery-ribbonia"]
@@ -336,10 +331,10 @@ local nexus_discovery_technologies = {
 	"planet-nexus-scanning-Krastorio2-space-out"
 }
 
-add_existing_prerequisites("planet-nexus-scanning", {"planet-discovery-aquilo"})
-add_existing_prerequisites("planet-nexus-scanning-Krastorio2-space-out", {"planet-discovery-aquilo"})
-add_existing_prerequisites("planet-discovery-nexus", {"planet-discovery-aquilo"})
-add_existing_prerequisites("kr-intergalactic-transceiver", {"planet-discovery-aquilo"})
+add_existing_prerequisites("planet-nexus-scanning", {"planet-discovery-frozeta"})
+add_existing_prerequisites("planet-nexus-scanning-Krastorio2-space-out", {"planet-discovery-frozeta"})
+add_existing_prerequisites("planet-discovery-nexus", {"planet-discovery-frozeta"})
+add_existing_prerequisites("kr-intergalactic-transceiver", {"planet-discovery-frozeta"})
 add_existing_prerequisites("planet-nexus-scanning", {"planet-discovery-crucible"})
 add_existing_prerequisites("planet-nexus-scanning-Krastorio2-space-out", {"planet-discovery-crucible"})
 add_existing_prerequisites("planet-discovery-nexus", {"planet-discovery-crucible"})
@@ -349,7 +344,7 @@ add_existing_prerequisites("planet-nexus-scanning-Krastorio2-space-out", {transc
 add_existing_prerequisites("planet-discovery-nexus", {transceiver_gate_technology})
 set_many_science_after(nexus_discovery_technologies, "beetlejuice")
 
-add_existing_prerequisites("promethium-science-pack", {"planet-discovery-aquilo"})
+add_existing_prerequisites("promethium-science-pack", {"planet-discovery-frozeta"})
 add_existing_prerequisites("promethium-science-pack", {"planet-discovery-crucible"})
 set_technology_unit_ingredients_if_exists("promethium-science-pack", build_solar_system_edge_science())
 set_science_after("promethium-882-research", "beetlejuice")

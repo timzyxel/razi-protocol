@@ -119,7 +119,26 @@ PlanetsLib:update({
 	},
 	{
 		type = "planet",
-		name = "aquilo",
+		name = "vesta",
+		distance = nil,
+		orientation = nil,
+		orbit = {
+			parent = {
+				type = "space-location",
+				name = "beetlejuice",
+			},
+			distance = 25,
+			orientation = 0.4,
+			sprite = {
+				type = "sprite",
+				filename = "__razi-protocol__/graphics/orbits/orbit_25.png",
+				size = 2048,
+			},
+		},
+	},
+	{
+		type = "space-location",
+		name = "secretas",
 		distance = nil,
 		orientation = nil,
 		orbit = {
@@ -138,20 +157,20 @@ PlanetsLib:update({
 	},
 	{
 		type = "planet",
-		name = "vesta",
+		name = "frozeta",
 		distance = nil,
 		orientation = nil,
 		orbit = {
 			parent = {
 				type = "space-location",
-				name = "beetlejuice",
+				name = "secretas",
 			},
-			distance = 25,
-			orientation = 0.4,
+			distance = 4.5,
+			orientation = 0.18,
 			sprite = {
 				type = "sprite",
-				filename = "__razi-protocol__/graphics/orbits/orbit_25.png",
-				size = 2048,
+				filename = "__razi-protocol__/graphics/orbits/orbit_4.5.png",
+				size = 369,
 			},
 		},
 	},
@@ -182,10 +201,15 @@ local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-de
 deleteRoute("vulcanus-cubium")
 deleteRoute("gleba-cubium")
 deleteRoute("cubium-aquilo")
+deleteRoute("cubium-frozeta")
 deleteRoute("paracelsin-aquilo")
+deleteRoute("paracelsin-frozeta")
 deleteRoute("aquilo-solar-system-edge")
+deleteRoute("frozeta-solar-system-edge")
 deleteRoute("vesta-aquilo")
+deleteRoute("vesta-frozeta")
 deleteRoute("aquilo-vesta")
+deleteRoute("frozeta-vesta")
 deleteRoute("nauvis-vesta")
 deleteRoute("vulcanus-vesta")
 deleteRoute("fulgora-vesta")
@@ -201,6 +225,10 @@ deleteRoute("sye-beetlejuice-tenebris")
 deleteRoute("cubium-vesta")
 deleteRoute("sye-beetlejuice-vesta")
 deleteRoute("sye-beetlejuice-aquilo")
+deleteRoute("sye-beetlejuice-frozeta")
+deleteRoute("sye-beetlejuice-secretas")
+deleteRoute("vesta-secretas")
+deleteRoute("secretas-frozeta")
 
 data:extend({
 	{
@@ -213,25 +241,25 @@ data:extend({
 	},
 	{
 		type = "space-connection",
-		name = "cubium-vesta",
+		name = "cubium-secretas",
 		from = "cubium",
-		to = "vesta",
+		to = "secretas",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
-		name = "vesta-aquilo",
-		from = "vesta",
-		to = "aquilo",
-		length = 15000,
+		name = "secretas-frozeta",
+		from = "secretas",
+		to = "frozeta",
+		length = 7500,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.gleba_aquilo)
 	},
 	{
 		type = "space-connection",
-		name = "sye-beetlejuice-tenebris",
+		name = "sye-beetlejuice-vesta",
 		from = "sye-beetlejuice",
-		to = "tenebris",
+		to = "vesta",
 		length = 15000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
@@ -253,8 +281,8 @@ data:extend({
 	},
 	{
 		type = "space-connection",
-		name = "aquilo-solar-system-edge",
-		from = "aquilo",
+		name = "secretas-solar-system-edge",
+		from = "secretas",
 		to = "solar-system-edge",
 		length = 75000,
 		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.aquilo_solar_system_edge)

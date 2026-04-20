@@ -1,6 +1,6 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
 
-if not mods["Electric_flying_enemies"] then
+if not enemy_autoplace.enabled() or not mods["Electric_flying_enemies"] then
 	return
 end
 

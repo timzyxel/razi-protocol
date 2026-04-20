@@ -10,11 +10,12 @@ The mod adds a new system-based progression structure, reorganizes where many pl
 - New system discovery technologies for Solaris, Nyxaris, Vibrant, and Beetlejuice.
 - New system tech cards for Calidus, Solaris, Nyxaris, Vibrant, Beetlejuice, and Deep Space.
 - A reworked science progression where later systems use cards from earlier systems instead of requiring giant walls of individual science packs.
-- A custom deep-space route after Aquilo, including Nexus, the black hole approach, black hole, Oort Cloud, and Sol.
+- A custom deep-space route after Frozeta, including Nexus, the black hole approach, black hole, Oort Cloud, and Sol.
 - A Krastorio 2 Spaced Out transceiver endgame chain with Intergalactic Singularity Theory, Intergalactic Singularity Test Fire, Stable Intergalactic Singularity, and Intergalactic Signal Lock.
 - A Deep Space Tech Card that replaces the many Nexus omega science packs in research requirements and hides the omega-pack clutter from normal play.
 - Planet-specific enemy placement for arachnids, armoured biters, cold biters, electric flying enemies, explosive biters, and toxic biters.
 - Vanilla biter and worm autoplace suppression on planets where a custom enemy faction is meant to be the main threat.
+- A startup setting to disable Razi's enemy routing if you want the enemy mods to keep their original spawning behavior.
 - Science Tab compatibility that moves system cards, planet science packs, and research data into cleaner science subgroups.
 - A Vehicles & Infrastructure crafting tab that pulls rails, vehicles, power poles, floors, foundations, landfill, and platform pieces out of the overloaded Logistics tab.
 - Prototype identity polish for overlapping planet unlocks, including Moshine grid reserves, Rubia wind-handled inserters, Cubium dream logistics, Ribbonia lane splitters, and compact solar panels.
@@ -31,9 +32,9 @@ Solaris is the first major custom system layer. It brings in Castra, Arig, Hyari
 
 Nyxaris is a shared mid-tier system for both Nyxaris and Dea Dia progression. It integrates Dea Dia into the Nyxaris region and places Apia Carnova, Moshine, Panglia, and Pelagos into the same broader stage. Its card combines aerospace, Dea Dia, insulation, thermodynamic, nuclear, apicultural, and Pelagos style science.
 
-Vibrant is the strange exotic system. It contains Ribbonia, Paracelsin, Secretas, Frozeta, Rubia, and Maraxsis. Its card combines the alien, recycling, biofusion, galvanization, golden, and hydraulic style sciences from that chapter.
+Vibrant is the strange exotic system. It contains Ribbonia, Paracelsin, Aquilo, Rubia, and Maraxsis. Its card combines the alien, recycling, biofusion, galvanization, and hydraulic style sciences from that chapter.
 
-Beetlejuice is the harsh late-game planetary system. It includes Cubium, Tenebris, Crucible, Vesta, and Aquilo, then leads onward to the solar system edge. Its card combines bioluminescent, cryogenic, gas manipulation, and Crucible science before the player moves into deep-space progression.
+Beetlejuice is the harsh late-game planetary system. It includes Cubium, Tenebris, Crucible, Vesta, Secretas, and Frozeta, then leads onward to the solar system edge. Its card combines bioluminescent, cryogenic, gas manipulation, Crucible, and golden science before the player moves into deep-space progression.
 
 Deep Space is the endgame chapter. It places Nexus after the solar system edge, then uses the black hole approach, black hole, Oort Cloud, and Sol as the final route. This is where Nexus, Void Processing, Sol, promethium, antimatter, and the transceiver gate all start tying together. The Deep Space Tech Card becomes the compact replacement for Nexus omega science and is used for the last stretch of research.
 
@@ -84,7 +85,7 @@ Razi Protocol moves several enemy mods away from Nauvis-style generic spawning a
 - Explosive biters spawn on Moshine and Nexus.
 - Toxic biters spawn on Cubium, Vesta, Nexus, and Crucible.
 
-On planets where Razi Protocol assigns custom enemies, it also suppresses vanilla biter and worm spawns so the custom faction is not buried under default enemy noise.
+On planets where Razi Protocol assigns custom enemies, it also suppresses vanilla biter and worm spawns so the custom faction is not buried under default enemy noise. This behavior can be disabled with the `razi-enable-enemy-routing` startup setting. The enemy mods are optional, so the routing only applies for the enemy packs you actually install.
 
 ## Space Map Layout
 
@@ -93,8 +94,8 @@ The mod adds or moves many locations and routes with PlanetsLib. The current rou
 - Calidus slipstream connects the early star region to the custom systems.
 - Solaris contains Castra, Arig, Hyarion, Tellus, and Corrundum.
 - Nyxaris contains the Nyxaris slipstream, Dea Dia system access, Apia Carnova, Moshine, Panglia, and Pelagos.
-- Vibrant contains Ribbonia, Paracelsin, Secretas, Frozeta, Rubia, and Maraxsis.
-- Beetlejuice contains Cubium, Tenebris, Crucible, Vesta, Aquilo, and the edge of deep space.
+- Vibrant contains Ribbonia, Paracelsin, Aquilo, Rubia, and Maraxsis.
+- Beetlejuice contains Cubium, Tenebris, Crucible, Vesta, Secretas, Frozeta, and the edge of deep space.
 - Deep Space contains Nexus, the black hole approach, black hole, Oort Cloud, and Sol.
 
 Some original planet-mod routes are deleted or replaced so the intended progression path stays clean.
@@ -120,9 +121,9 @@ Razi Protocol includes compatibility logic for:
 
 ## Major Required Content Mods
 
-Razi Protocol is designed around a large dependency set. Major content mods include Krastorio2 Spaced Out, PlanetsLib, Terra Palus, Muluna, the Planetaris planet set, Cerys, Dea Dia, Corrundum, Apia, Moshine, Panglia, Pelagos, Tenebris Prime, Secretas, Maraxsis, Rubia, Nexus, Void Processing, Vesta, Castra, Crucible, Ribbonia, Dyson Sphere Reworked, and several enemy mods.
+Razi Protocol is designed around a large dependency set. Major content mods include Krastorio2 Spaced Out, PlanetsLib, Terra Palus, Muluna, the Planetaris planet set, Cerys, Dea Dia, Corrundum, Apia, Moshine, Panglia, Pelagos, Tenebris Prime, Secretas, Maraxsis, Rubia, Nexus, Void Processing, Vesta, Castra, Crucible, Ribbonia, and Dyson Sphere Reworked.
 
-It also supports a number of optional quality-of-life and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods. Lignumis is also marked as incompatible for now because the full Razi Protocol pack already sits too close to that same collision-layer cap.
+It also supports a number of optional quality-of-life, enemy, and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods. Lignumis is also marked as incompatible for now because the full Razi Protocol pack already sits too close to that same collision-layer cap.
 
 ## Credits
 

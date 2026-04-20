@@ -76,8 +76,10 @@ PlanetsLib:update({
 		},
 	},
 	{
-		type = "space-location",
-		name = "secretas",
+		type = "planet",
+		name = "aquilo",
+		distance = nil,
+		orientation = nil,
 		orbit = {
 			parent = {
 				type = "space-location",
@@ -89,23 +91,6 @@ PlanetsLib:update({
 				type = "sprite",
 				filename = "__razi-protocol__/graphics/orbits/orbit_25.png",
 				size = 2048,
-			},
-		},
-	},
-	{
-		type = "planet",
-		name = "frozeta",
-		orbit = {
-			parent = {
-				type = "space-location",
-				name = "secretas",
-			},
-			distance = 4.5,
-			orientation = 0.18,
-			sprite = {
-				type = "sprite",
-				filename = "__razi-protocol__/graphics/orbits/orbit_4.5.png",
-				size = 369,
 			},
 		},
 	},
@@ -159,6 +144,7 @@ deleteRoute("fulgora-paracelsin")
 deleteRoute("paracelsin-aquilo")
 deleteRoute("paracelsin-solar-system-edge")
 deleteRoute("aquilo-secretas")
+deleteRoute("secretas-aquilo")
 deleteRoute("secretas-edge")
 deleteRoute("aquilo-frozeta")
 deleteRoute("frozeta-edge")
@@ -177,6 +163,8 @@ deleteRoute("nauvis-ribbonia")
 deleteRoute("sye-beetlejuice-ribbonia")
 deleteRoute("cubium-ribbonia")
 deleteRoute("ribbonia-crucible-orbit")
+deleteRoute("sye-vibrant-aquilo")
+deleteRoute("aquilo-rubia")
 
 data:extend({
 	{
@@ -185,23 +173,23 @@ data:extend({
 		from = "sye-vibrant",
 		to = "ribbonia",
 		length = 20000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
-		name = "sye-vibrant-secretas",
+		name = "sye-vibrant-aquilo",
 		from = "sye-vibrant",
-		to = "secretas",
+		to = "aquilo",
 		length = 40000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
-		name = "secretas-rubia",
-		from = "secretas",
+		name = "aquilo-rubia",
+		from = "aquilo",
 		to = "rubia",
 		length = 25000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
@@ -209,15 +197,7 @@ data:extend({
 		from = "rubia",
 		to = "maraxsis",
 		length = 30000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
-	},
-	{
-		type = "space-connection",
-		name = "secretas-frozeta",
-		from = "secretas",
-		to = "frozeta",
-		length = 7500,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 	{
 		type = "space-connection",
@@ -225,6 +205,6 @@ data:extend({
 		from = "ribbonia",
 		to = "paracelsin",
 		length = 40000,
-		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_fulgora)
+		asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.fulgora_aquilo)
 	},
 })

@@ -185,9 +185,27 @@ local function move_infrastructure()
 	move_tiles_and_floors()
 end
 
+local function keep_railguns_in_combat()
+	for _, item_type in ipairs({"item", "item-with-entity-data", "ammo", "gun"}) do
+		for item_name, _ in pairs(data.raw[item_type] or {}) do
+			if item_name:find("railgun") then
+				set_subgroup(item_type, item_name, item_name:find("ammo") and "ammo" or "gun")
+			end
+		end
+	end
+
+	for recipe_name, recipe in pairs(data.raw.recipe or {}) do
+		local result_name = recipe_result_name(recipe)
+		if recipe_name:find("railgun") or (result_name and result_name:find("railgun")) then
+			set_subgroup("recipe", recipe_name, (recipe_name:find("ammo") or (result_name and result_name:find("ammo"))) and "ammo" or "gun")
+		end
+	end
+end
+
 function logistics_cleanup.data_final_fixes()
 	ensure_group()
 	move_infrastructure()
+	keep_railguns_in_combat()
 end
 
 return logistics_cleanup

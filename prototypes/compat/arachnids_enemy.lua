@@ -1,4 +1,9 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
+
+if not enemy_autoplace.enabled() or not mods["Arachnids_enemy"] then
+	return
+end
+
 local arachnid_spawner = data.raw["unit-spawner"]["arachnid-spawner-unitspawner"]
 
 local arachnid_tiles = {

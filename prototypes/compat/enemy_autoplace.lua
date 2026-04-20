@@ -9,6 +9,14 @@ local vanilla_enemy_entities = {
 	"behemoth-worm-turret"
 }
 
+function enemy_autoplace.enabled()
+	local setting = settings
+		and settings.startup
+		and settings.startup["razi-enable-enemy-routing"]
+
+	return not setting or setting.value ~= false
+end
+
 local function planet_entity_settings(planet_name)
 	local planet = data.raw.planet and data.raw.planet[planet_name]
 	local map_gen_settings = planet and planet.map_gen_settings
@@ -24,6 +32,10 @@ local function planet_entity_settings(planet_name)
 end
 
 function enemy_autoplace.disable_vanilla_enemies_on_planet(planet_name)
+	if not enemy_autoplace.enabled() then
+		return
+	end
+
 	local entity_settings = planet_entity_settings(planet_name)
 	if not entity_settings then
 		return
@@ -65,6 +77,10 @@ function enemy_autoplace.enemy_entity_exists(entity_name)
 end
 
 function enemy_autoplace.restrict_entity_to_tiles(entity_type, entity_name, tile_names)
+	if not enemy_autoplace.enabled() then
+		return
+	end
+
 	local entity = enemy_autoplace.entity_exists(entity_type, entity_name)
 	if entity and entity.autoplace then
 		entity.autoplace.tile_restriction = tile_names
@@ -72,6 +88,10 @@ function enemy_autoplace.restrict_entity_to_tiles(entity_type, entity_name, tile
 end
 
 function enemy_autoplace.remove_entities_from_planet(planet_name, entity_names, control_name)
+	if not enemy_autoplace.enabled() then
+		return
+	end
+
 	local planet = data.raw.planet and data.raw.planet[planet_name]
 	local map_gen_settings = planet and planet.map_gen_settings
 	if not map_gen_settings then
@@ -96,6 +116,10 @@ function enemy_autoplace.remove_entities_from_planet(planet_name, entity_names, 
 end
 
 function enemy_autoplace.prepare_custom_enemy_planet(planet_name, control_name)
+	if not enemy_autoplace.enabled() then
+		return nil
+	end
+
 	local planet = data.raw.planet and data.raw.planet[planet_name]
 	local map_gen_settings = planet and planet.map_gen_settings
 	if not map_gen_settings then

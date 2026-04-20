@@ -138,8 +138,8 @@ local function loosen_matter_research_data_surface()
 		return
 	end
 
-	-- K2SO 1.6 moved this onto Aquilo pressure only. Razi moves Aquilo deep
-	-- into Beetlejuice, so the data recipe needs to follow the broader K2SO
+	-- K2SO 1.6 moved this onto Aquilo pressure only. Razi moves Aquilo into
+	-- the expanded system ladder, so the data recipe needs to follow the broader K2SO
 	-- matter route instead of hard-locking one planet.
 	matter_data.surface_conditions = nil
 end
@@ -188,11 +188,12 @@ local function add_imersite_to_far_space()
 	for _, connection_name in ipairs({
 		"sye-beetlejuice-cubium",
 		"cubium-vesta",
-		"vesta-aquilo",
+		"vesta-secretas",
+		"secretas-frozeta",
 		"sye-beetlejuice-tenebris",
 		"tenebris-crucible-orbit",
 		"crucible-orbit-vesta",
-		"aquilo-solar-system-edge"
+		"frozeta-solar-system-edge"
 	}) do
 		append_spawn_definitions(data.raw["space-connection"] and data.raw["space-connection"][connection_name], inner_belt)
 	end
@@ -207,11 +208,11 @@ local function add_imersite_to_far_space()
 		append_spawn_definitions(data.raw["space-connection"] and data.raw["space-connection"][connection_name], outer_belt)
 	end
 
-	for _, planet_name in ipairs({"cubium", "vesta", "aquilo", "nexus"}) do
+	for _, planet_name in ipairs({"cubium", "vesta", "aquilo", "frozeta", "nexus"}) do
 		append_spawn_definitions(data.raw.planet and data.raw.planet[planet_name], local_orbit)
 	end
 
-	for _, location_name in ipairs({"solar-system-edge", "oort-cloud", "black-hole-approach"}) do
+	for _, location_name in ipairs({"secretas", "solar-system-edge", "oort-cloud", "black-hole-approach"}) do
 		append_spawn_definitions(data.raw["space-location"] and data.raw["space-location"][location_name], local_orbit)
 	end
 end

@@ -1,5 +1,9 @@
 local enemy_autoplace = require("prototypes.compat.enemy_autoplace")
 
+if not enemy_autoplace.enabled() or not mods["ArmouredBiters"] then
+	return
+end
+
 local armoured_biter_units = {
 	["small-armoured-biter"] = true,
 	["medium-armoured-biter"] = true,

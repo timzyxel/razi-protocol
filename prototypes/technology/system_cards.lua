@@ -89,7 +89,6 @@ local card_definitions = {
 			"rubia-biofusion-science-pack",
 			"galvanization-science-pack",
 			"paracelsin-galvanization-science-pack",
-			"golden-science-pack",
 			"hydraulic-science-pack"
 		}
 	},
@@ -103,7 +102,8 @@ local card_definitions = {
 			"bioluminescent-science-pack",
 			"cryogenic-science-pack",
 			"gas-manipulation-science-pack",
-			"planet-crucible-science-pack"
+			"planet-crucible-science-pack",
+			"golden-science-pack"
 		}
 	},
 	{
