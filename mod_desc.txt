@@ -18,7 +18,7 @@ The mod adds a new system-based progression structure, reorganizes where many pl
 - A startup setting to disable Razi's enemy routing if you want the enemy mods to keep their original spawning behavior.
 - Science Tab compatibility that moves system cards, planet science packs, and research data into cleaner science subgroups.
 - A Vehicles & Infrastructure crafting tab that pulls rails, vehicles, power poles, floors, foundations, landfill, and platform pieces out of the overloaded Logistics tab.
-- Prototype identity polish for overlapping planet unlocks, including Moshine grid reserves, Rubia wind-handled inserters, Cubium dream logistics, Ribbonia lane splitters, and compact solar panels.
+- Small balance tweaks for overlapping planet unlocks, without overriding the source mods' item names or descriptions.
 - Compatibility patches for K2SO enhancement/tweak mods, route assumptions, lab inputs, and several prototype load edge cases.
 - A forced Tellus setting override so Tellus does not move Maraxsis away from Razi Protocol's intended system layout.
 
@@ -62,7 +62,7 @@ Vehicles & Infrastructure collects:
 - Power poles, substations, switches, lightning rods, and lightning collectors.
 - Floors, concrete, landfill, scaffolding, foundations, and space platform foundation pieces.
 
-Razi Protocol also adds a small prototype identity pass. The goal is not to delete similar items from other mods, but to make them read as different tools. Moshine accumulators become slow high-capacity grid reserves. Rubia inserters are wind-safe hostile-surface tools. Cubium dream belt recipes are cube-loop conversions rather than new speed tiers. Ribbonia lane splitters are lane-control parts. Tiny solar panels are compact layout pieces, while Muluna silicon solar is an alternate recipe path.
+Razi Protocol also adds a small balance pass for a few overlapping planet unlocks. The goal is not to rename items or replace source mod descriptions, but to keep a few duplicate-feeling unlocks from stepping on each other mechanically. For example, Moshine's large accumulator has more storage but slower flow, Rubia's long inserters keep their source-mod names while receiving small handling adjustments, Cubium dream logistics recipes stay more expensive conversion routes, and tiny solar panels stay compact but fragile.
 
 ## Endgame Changes
 
@@ -110,7 +110,7 @@ Razi Protocol includes compatibility logic for:
 - Nexus omega science replacement.
 - Science Tab grouping and lab input fixes.
 - Vehicles & Infrastructure crafting group cleanup for overloaded logistics inventories.
-- Prototype identity polish for duplicate-looking planet logistics and power unlocks.
+- Small balance tweaks for duplicate-looking planet logistics and power unlocks, without overriding source mod titles or descriptions.
 - xy-k2so-enhancements-nulls-fork route assumptions around Moshine.
 - nulls-k2so-tweaks and related K2SO tuning dependencies.
 - Maraxsis and K2SO electric mining drill collision masks, keeping drill upgrades valid after Maraxsis adds underwater build rules.

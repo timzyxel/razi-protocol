@@ -8,6 +8,7 @@ Date: 20. 04. 2026
     - Moved Aquilo into the Vibrant branch and moved Secretas/Frozeta together into the late Beetlejuice route toward deep space.
     - Kept Secretas and Frozeta paired on the starmap, with Secretas leading into Frozeta before the solar system edge.
     - Moved Secretas' golden science into the Beetlejuice tech card tier so system cards match the new layout.
+    - Removed Razi's item, recipe, entity, and technology title/description overrides from the planet unlock polish pass.
     - Updated the deep-space gate so Nexus, promethium, and the transceiver route follow Frozeta's new late-game position.
 
 ---------------------------------------------------------------------------------------------------
@@ -24,12 +25,11 @@ Date: 17. 04. 2026
   Features:
     - Added a new Vehicles & Infrastructure crafting group to reduce clutter in the default logistics tab.
     - Moved vehicles, rail infrastructure, power distribution, floors, foundations, landfill, scaffolding, and platform items into the new infrastructure group.
-    - Added prototype identity polish so overlapping planet unlocks feel more distinct instead of looking like duplicate rewards.
-    - Gave Moshine big accumulators a clearer Grid Reserve identity with high storage and slower charge/discharge behavior.
-    - Gave Moshine and Rubia long inserter lines different roles: Moshine favors awkward long-reach data-center logistics, while Rubia is framed around wind-safe hostile-surface logistics.
-    - Clarified Cubium dream belt recipes as cube-loop conversion routes rather than new belt tiers.
-    - Clarified Ribbonia lane splitters as compact lane-control tools rather than another belt speed upgrade.
-    - Clarified Muluna silicon solar panels as an alternate supply-chain recipe, while Ribbonia/Tiny Solar compact panels are treated as fragile one-tile layout tools.
+    - Added small balance tweaks so overlapping planet unlocks feel less like direct duplicates.
+    - Adjusted Moshine big accumulators toward high storage with slower charge/discharge behavior.
+    - Adjusted Moshine and Rubia long inserter behavior so the two unlock lines feel less identical.
+    - Made Cubium dream belt recipes slower conversion routes with quality support.
+    - Adjusted tiny solar panels to behave as compact but fragile layout pieces.
 
   Changes:
     - Removed the K2SO Singularity Tech Card ingredient from the Deep Space Tech Card recipe so singularity science stays in the final transceiver chain instead of appearing too early.
@@ -48,4 +48,4 @@ Date: 17. 04. 2026
     - Added final-fixes guards around several optional prototype polish changes so missing optional content does not crash data stage.
 
   Info:
-    - Updated README and mod page description to document the new crafting tab, prototype identity polish, Imersite asteroid route changes, and current compatibility notes.
+    - Updated README and mod page description to document the new crafting tab, prototype polish, Imersite asteroid route changes, and current compatibility notes.

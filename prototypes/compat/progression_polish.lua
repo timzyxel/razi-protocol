@@ -97,31 +97,14 @@ local function restore_muluna_green_plastic_gate()
 		}
 	end
 
-	green_plastic.localised_description = {
-		"",
-		"Unlocks Muluna's nanofoamed polymer chain after combining Vulcanus, Fulgora, Gleba, and Muluna material science."
-	}
 end
 
 local function clarify_long_stack_inserters()
-	local moshine_long_stack = technology("long-stack-inserter")
-	if moshine_long_stack then
-		moshine_long_stack.localised_description = {
-			"",
-			"Unlocks the normal long stack inserter line through Moshine data processing."
-		}
-	end
-
 	local rubia_long_stack = technology("rubia-long-stack-inserter")
 	if not rubia_long_stack then
 		return
 	end
 
-	rubia_long_stack.localised_name = {"", "Rubia Wind-Handled Stack Inserter"}
-	rubia_long_stack.localised_description = {
-		"",
-		"Unlocks Rubia's wind-safe long stack inserter variant. It is a planet-specific upgrade, not a duplicate of Moshine's normal long stack inserter."
-	}
 	add_prerequisite(rubia_long_stack, "long-stack-inserter")
 end
 
