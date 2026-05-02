@@ -1,4 +1,5 @@
-set_prerequisites_if_exists("planet-discovery-vesta", {"planet-discovery-cubium"})
+-- Vesta now sits beyond Crucible in the Beetlejuice routes.
+set_prerequisites_if_exists("planet-discovery-vesta", {"planet-discovery-crucible"})
 set_technology_unit_ingredients_if_exists("planet-discovery-vesta", build_integrated_science_ingredients({
 	primary_science_packs = {
 		"automation-science-pack",
