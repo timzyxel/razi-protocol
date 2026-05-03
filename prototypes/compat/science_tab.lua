@@ -156,7 +156,10 @@ function science_tab.data_final_fixes()
 		set_subgroup("recipe", name, "research-data")
 	end
 
-	add_required_science_packs_to_labs(collect_technology_science_packs())
+	local lab_science_packs = collect_technology_science_packs()
+	add_existing_science_packs(lab_science_packs, system_tech_cards)
+	add_existing_science_packs(lab_science_packs, collect_recipe_science_packs(system_tech_cards))
+	add_required_science_packs_to_labs(lab_science_packs)
 end
 
 return science_tab

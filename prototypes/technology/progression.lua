@@ -354,4 +354,5 @@ set_first_existing_prerequisite("black-hole-discovery", {
 set_science_through("black-hole-discovery", "nexus")
 local generic_lab_science_packs = collect_technology_science_packs()
 add_existing_science_packs(generic_lab_science_packs, system_tech_cards)
+add_existing_science_packs(generic_lab_science_packs, collect_recipe_science_packs(system_tech_cards))
 add_science_to_labs(generic_lab_science_packs)

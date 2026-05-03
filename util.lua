@@ -219,6 +219,26 @@ function collect_technology_science_packs()
 	return science_packs
 end
 
+function collect_recipe_science_packs(recipe_names)
+	local science_packs = {}
+	local seen = {}
+
+	for _, recipe_name in ipairs(recipe_names or {}) do
+		local recipe = data.raw.recipe and data.raw.recipe[recipe_name]
+		local ingredients = recipe and recipe.ingredients
+
+		for _, ingredient in ipairs(ingredients or {}) do
+			local name = ingredient and (ingredient.name or ingredient[1])
+			if name and science_pack_exists(name) and not seen[name] then
+				seen[name] = true
+				table.insert(science_packs, name)
+			end
+		end
+	end
+
+	return science_packs
+end
+
 function add_first_existing_science_pack(ingredients, science_packs)
 	for _, science_pack in ipairs(science_packs or {}) do
 		if add_science_pack_if_exists(ingredients, science_pack) then
