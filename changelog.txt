@@ -1,5 +1,11 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.1.6
+Version: 1.2.3
+Date: 3. 05. 2026
+  Bugfixes:
+    - Fixed the stupid labs not showing the right science packs, oh my god...
+
+---------------------------------------------------------------------------------------------------
+Version: 1.2.1
 Date: 22. 04. 2026
   Bugfixes:
     - Hardened the K2 sand recipe so `kr-sand` stays a crusher recipe with stone input instead of being left to late-stage category drift.

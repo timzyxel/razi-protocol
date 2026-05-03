@@ -1,6 +1,7 @@
 require("util")
 
-
+package.loaded["prototypes.technology.system_cards"] = nil
+require("prototypes.technology.system_cards")
 package.loaded["prototypes.technology.progression"] = nil
 require("prototypes.technology.progression")
 require("prototypes.compat.transceiver_endgame").data_final_fixes()

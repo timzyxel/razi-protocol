@@ -25,7 +25,11 @@ local card_definitions = {
 		localised_name = "Calidus Tech Card",
 		tint = {r = 1.0, g = 0.86, b = 0.08},
 		order = "s[system]-a[calidus]",
-		unlock_technology = "solaris-discovery",
+		unlock_technology_candidates = {
+			"planet-discovery-castra",
+			"planet-discovery-muluna",
+			"moon-discovery-cerys"
+		},
 		ingredients = {
 			"automation-science-pack",
 			"logistic-science-pack",
@@ -50,7 +54,9 @@ local card_definitions = {
 		localised_name = "Solaris Tech Card",
 		tint = {r = 1.0, g = 0.52, b = 0.18},
 		order = "s[system]-b[solaris]",
-		unlock_technology = "solaris-discovery",
+		unlock_technology_candidates = {
+			"planet-discovery-castra"
+		},
 		ingredients = {
 			"battlefield-science-pack",
 			"planetaris-compression-science-pack",
@@ -66,7 +72,13 @@ local card_definitions = {
 		localised_name = "Nyxaris Tech Card",
 		tint = {r = 0.36, g = 0.62, b = 1.0},
 		order = "s[system]-c[nyxaris]",
-		unlock_technology = "nyxaris-discovery",
+		unlock_technology_candidates = {
+			"system-discovery-dea-dia",
+			"planet-discovery-dea-dia",
+			"planet-discovery-apia-carnova",
+			"planet-discovery-moshine",
+			"planet-discovery-pelagos"
+		},
 		ingredients = {
 			"aerospace-science-pack",
 			"dea-dia-science-pack",
@@ -82,7 +94,11 @@ local card_definitions = {
 		localised_name = "Vibrant Tech Card",
 		tint = {r = 0.82, g = 0.28, b = 1.0},
 		order = "s[system]-d[vibrant]",
-		unlock_technology = "vibrant-discovery",
+		unlock_technology_candidates = {
+			"planet-discovery-ribbonia",
+			"planet-discovery-aquilo",
+			"planet-discovery-maraxsis"
+		},
 		ingredients = {
 			"ribbonia-alien-science-pack",
 			"biorecycling-science-pack",
@@ -97,7 +113,10 @@ local card_definitions = {
 		localised_name = "Beetlejuice Tech Card",
 		tint = {r = 0.22, g = 1.0, b = 0.42},
 		order = "s[system]-e[beetlejuice]",
-		unlock_technology = "beetlejuice-discovery",
+		unlock_technology_candidates = {
+			"planet-discovery-cubium",
+			"planet-discovery-tenebris"
+		},
 		ingredients = {
 			"bioluminescent-science-pack",
 			"cryogenic-science-pack",
@@ -111,7 +130,9 @@ local card_definitions = {
 		localised_name = "Deep Space Tech Card",
 		tint = {r = 0.18, g = 0.18, b = 0.22},
 		order = "s[system]-f[deep-space]",
-		unlock_technology = "promethium-882-research",
+		unlock_technology_candidates = {
+			"promethium-882-research"
+		},
 		fallback_ingredients = {
 			"beetlejuice-tech-card",
 			"promethium-science-pack"
@@ -125,7 +146,9 @@ local card_definitions = {
 }
 
 local function science_pack_exists(name)
-	return data.raw.tool and data.raw.tool[name]
+	return
+		(data.raw.tool and data.raw.tool[name]) or
+		(data.raw.item and data.raw.item[name])
 end
 
 local function build_recipe_ingredients(science_packs)
@@ -169,8 +192,19 @@ local function add_recipe_unlock(technology_name, recipe_name)
 	})
 end
 
+local function find_first_existing_technology(candidates)
+	for _, technology_name in ipairs(candidates or {}) do
+		if data.raw.technology and data.raw.technology[technology_name] then
+			return technology_name
+		end
+	end
+
+	return nil
+end
+
 for _, card in ipairs(card_definitions) do
 	local ingredients = build_card_ingredients(card)
+	local unlock_technology = find_first_existing_technology(card.unlock_technology_candidates)
 
 	if #ingredients > 0 then
 		data:extend({
@@ -210,7 +244,9 @@ for _, card in ipairs(card_definitions) do
 			}
 		})
 
-		add_recipe_unlock(card.unlock_technology, card.name)
+		if unlock_technology then
+			add_recipe_unlock(unlock_technology, card.name)
+		end
 	end
 end
 
