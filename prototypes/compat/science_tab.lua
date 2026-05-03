@@ -157,8 +157,8 @@ function science_tab.data_final_fixes()
 	end
 
 	local lab_science_packs = collect_technology_science_packs()
-	add_existing_science_packs(lab_science_packs, system_tech_cards)
-	add_existing_science_packs(lab_science_packs, collect_recipe_science_packs(system_tech_cards))
+	add_unique_values(lab_science_packs, system_tech_cards)
+	add_unique_values(lab_science_packs, collect_recipe_science_packs(system_tech_cards))
 	add_required_science_packs_to_labs(lab_science_packs)
 end
 

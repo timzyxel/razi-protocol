@@ -197,6 +197,21 @@ function add_existing_science_packs(ingredients, science_packs)
 	end
 end
 
+function add_unique_values(values, new_values)
+	local seen = {}
+
+	for _, value in ipairs(values or {}) do
+		seen[value] = true
+	end
+
+	for _, value in ipairs(new_values or {}) do
+		if value and not seen[value] then
+			seen[value] = true
+			table.insert(values, value)
+		end
+	end
+end
+
 local function technology_ingredient_name(ingredient)
 	return ingredient and (ingredient.name or ingredient[1])
 end
