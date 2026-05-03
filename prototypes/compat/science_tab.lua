@@ -37,10 +37,6 @@ local function science_pack_exists(name)
 		(data.raw.item and data.raw.item[name])
 end
 
-local function ingredient_name(ingredient)
-	return ingredient and (ingredient.name or ingredient[1])
-end
-
 local function table_contains(values, value)
 	for _, existing in ipairs(values or {}) do
 		if existing == value then
@@ -55,22 +51,6 @@ local function add_unique(values, value)
 	if value and not table_contains(values, value) then
 		table.insert(values, value)
 	end
-end
-
-local function collect_required_science_packs()
-	local science_packs = {}
-
-	for _, technology in pairs(data.raw.technology or {}) do
-		local ingredients = technology.unit and technology.unit.ingredients
-		for _, ingredient in ipairs(ingredients or {}) do
-			local name = ingredient_name(ingredient)
-			if science_pack_exists(name) then
-				add_unique(science_packs, name)
-			end
-		end
-	end
-
-	return science_packs
 end
 
 local function lab_accepts_any(lab, science_packs)
@@ -176,7 +156,7 @@ function science_tab.data_final_fixes()
 		set_subgroup("recipe", name, "research-data")
 	end
 
-	add_required_science_packs_to_labs(collect_required_science_packs())
+	add_required_science_packs_to_labs(collect_technology_science_packs())
 end
 
 return science_tab

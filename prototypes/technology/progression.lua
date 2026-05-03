@@ -352,4 +352,6 @@ set_first_existing_prerequisite("black-hole-discovery", {
 	"planet-nexus-scanning"
 })
 set_science_through("black-hole-discovery", "nexus")
-add_science_to_labs(system_tech_cards)
+local generic_lab_science_packs = collect_technology_science_packs()
+add_existing_science_packs(generic_lab_science_packs, system_tech_cards)
+add_science_to_labs(generic_lab_science_packs)

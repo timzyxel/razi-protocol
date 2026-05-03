@@ -122,7 +122,9 @@ function remove_prerequisites_if_exists(technology_name, prerequisites_to_remove
 end
 
 function science_pack_exists(name)
-	return data.raw.tool and data.raw.tool[name] ~= nil
+	return
+		(data.raw.tool and data.raw.tool[name] ~= nil) or
+		(data.raw.item and data.raw.item[name] ~= nil)
 end
 
 local protected_lab_science_pack_lookup = {
@@ -193,6 +195,28 @@ function add_existing_science_packs(ingredients, science_packs)
 	for _, science_pack in ipairs(science_packs or {}) do
 		add_unique_science_pack_if_exists(ingredients, science_pack)
 	end
+end
+
+local function technology_ingredient_name(ingredient)
+	return ingredient and (ingredient.name or ingredient[1])
+end
+
+function collect_technology_science_packs()
+	local science_packs = {}
+	local seen = {}
+
+	for _, technology in pairs(data.raw.technology or {}) do
+		local ingredients = technology.unit and technology.unit.ingredients
+		for _, ingredient in ipairs(ingredients or {}) do
+			local name = technology_ingredient_name(ingredient)
+			if name and science_pack_exists(name) and not seen[name] then
+				seen[name] = true
+				table.insert(science_packs, name)
+			end
+		end
+	end
+
+	return science_packs
 end
 
 function add_first_existing_science_pack(ingredients, science_packs)
