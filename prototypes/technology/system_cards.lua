@@ -45,6 +45,9 @@ local card_definitions = {
 			"interstellar-science-pack",
 			"advanced-space-science-pack",
 			"cerysian-science-pack"
+		},
+		placeholder_ingredients = {
+			"automation-science-pack"
 		}
 	},
 	{
@@ -63,6 +66,10 @@ local card_definitions = {
 			"planetaris-pathological-science-pack",
 			"planetaris-refraction-science-pack",
 			"electrochemical-science-pack"
+		},
+		placeholder_ingredients = {
+			"calidus-tech-card",
+			"space-science-pack"
 		}
 	},
 	{
@@ -85,6 +92,10 @@ local card_definitions = {
 			"nuclear-science-pack",
 			"apicultural-science-pack",
 			"pelagos-science-pack"
+		},
+		placeholder_ingredients = {
+			"solaris-tech-card",
+			"space-science-pack"
 		}
 	},
 	{
@@ -104,6 +115,10 @@ local card_definitions = {
 			"galvanization-science-pack",
 			"paracelsin-galvanization-science-pack",
 			"hydraulic-science-pack"
+		},
+		placeholder_ingredients = {
+			"nyxaris-tech-card",
+			"space-science-pack"
 		}
 	},
 	{
@@ -121,6 +136,10 @@ local card_definitions = {
 			"gas-manipulation-science-pack",
 			"planet-crucible-science-pack",
 			"golden-science-pack"
+		},
+		placeholder_ingredients = {
+			"vibrant-tech-card",
+			"space-science-pack"
 		}
 	},
 	{
@@ -139,6 +158,10 @@ local card_definitions = {
 			"beetlejuice-tech-card",
 			"promethium-science-pack",
 			"promethium-882-science-pack"
+		},
+		placeholder_ingredients = {
+			"beetlejuice-tech-card",
+			"promethium-science-pack"
 		}
 	}
 }
@@ -166,6 +189,10 @@ local function build_card_ingredients(card)
 
 	if #ingredients == 0 then
 		ingredients = build_recipe_ingredients(card.fallback_ingredients)
+	end
+
+	if #ingredients == 0 then
+		ingredients = build_recipe_ingredients(card.placeholder_ingredients)
 	end
 
 	return ingredients
@@ -208,48 +235,96 @@ function system_cards.data_final_fixes()
 		local unlock_technology = find_first_existing_technology(card.unlock_technology_candidates)
 
 		if #ingredients > 0 then
-			data:extend({
-				{
-					type = "tool",
-					name = card.name,
-					localised_name = {"", card.localised_name},
-					localised_description = {"item-description.science-pack"},
-					icons = {
-						{
-							icon = "__base__/graphics/icons/space-science-pack.png",
-							icon_size = 64,
-							tint = card.tint
-						}
-					},
-					subgroup = system_card_subgroup,
-					order = card.order,
-					stack_size = 200,
-					durability = 1,
-					durability_description_key = "description.science-pack-remaining-amount-key",
-					factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
-					durability_description_value = "description.science-pack-remaining-amount-value"
-				},
-				{
-					type = "recipe",
-					name = card.name,
-					localised_name = {"", card.localised_name},
-					enabled = false,
-					category = "crafting",
-					energy_required = 10,
-					ingredients = ingredients,
-					results = {
-						{type = "item", name = card.name, amount = 1}
-					},
-					subgroup = system_card_subgroup,
-					order = card.order
+			local tool = data.raw.tool and data.raw.tool[card.name]
+			local recipe = data.raw.recipe and data.raw.recipe[card.name]
+
+			if not tool then
+				data:extend({
+					{
+						type = "tool",
+						name = card.name,
+						localised_name = {"", card.localised_name},
+						localised_description = {"item-description.science-pack"},
+						icons = {
+							{
+								icon = "__base__/graphics/icons/space-science-pack.png",
+								icon_size = 64,
+								tint = card.tint
+							}
+						},
+						subgroup = system_card_subgroup,
+						order = card.order,
+						stack_size = 200,
+						durability = 1,
+						durability_description_key = "description.science-pack-remaining-amount-key",
+						factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
+						durability_description_value = "description.science-pack-remaining-amount-value"
+					}
+				})
+				tool = data.raw.tool and data.raw.tool[card.name]
+			end
+
+			if tool then
+				tool.localised_name = {"", card.localised_name}
+				tool.localised_description = {"item-description.science-pack"}
+				tool.icons = {
+					{
+						icon = "__base__/graphics/icons/space-science-pack.png",
+						icon_size = 64,
+						tint = card.tint
+					}
 				}
-			})
+				tool.subgroup = system_card_subgroup
+				tool.order = card.order
+				tool.stack_size = 200
+				tool.durability = 1
+				tool.durability_description_key = "description.science-pack-remaining-amount-key"
+				tool.factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key"
+				tool.durability_description_value = "description.science-pack-remaining-amount-value"
+			end
+
+			if not recipe then
+				data:extend({
+					{
+						type = "recipe",
+						name = card.name,
+						localised_name = {"", card.localised_name},
+						enabled = false,
+						category = "crafting",
+						energy_required = 10,
+						ingredients = ingredients,
+						results = {
+							{type = "item", name = card.name, amount = 1}
+						},
+						subgroup = system_card_subgroup,
+						order = card.order
+					}
+				})
+				recipe = data.raw.recipe and data.raw.recipe[card.name]
+			end
+
+			if recipe then
+				recipe.localised_name = {"", card.localised_name}
+				recipe.enabled = false
+				recipe.category = "crafting"
+				recipe.energy_required = 10
+				recipe.ingredients = ingredients
+				recipe.results = {
+					{type = "item", name = card.name, amount = 1}
+				}
+				recipe.subgroup = system_card_subgroup
+				recipe.order = card.order
+			end
 
 			if unlock_technology then
 				add_recipe_unlock(unlock_technology, card.name)
 			end
 		end
 	end
+end
+
+function system_cards.data()
+	system_cards.data_final_fixes()
 end
 
 return system_cards
