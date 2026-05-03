@@ -17,8 +17,6 @@ local function ensure_item_subgroup(name, group, order)
 	})
 end
 
-ensure_item_subgroup(system_card_subgroup, "intermediate-products", "z[science]-a[system-tech-card]")
-
 local card_definitions = {
 	{
 		name = "calidus-tech-card",
@@ -202,50 +200,54 @@ local function find_first_existing_technology(candidates)
 	return nil
 end
 
-for _, card in ipairs(card_definitions) do
-	local ingredients = build_card_ingredients(card)
-	local unlock_technology = find_first_existing_technology(card.unlock_technology_candidates)
+function system_cards.data_final_fixes()
+	ensure_item_subgroup(system_card_subgroup, "intermediate-products", "z[science]-a[system-tech-card]")
 
-	if #ingredients > 0 then
-		data:extend({
-			{
-				type = "tool",
-				name = card.name,
-				localised_name = {"", card.localised_name},
-				localised_description = {"item-description.science-pack"},
-				icons = {
-					{
-						icon = "__base__/graphics/icons/space-science-pack.png",
-						icon_size = 64,
-						tint = card.tint
-					}
-				},
-				subgroup = system_card_subgroup,
-				order = card.order,
-				stack_size = 200,
-				durability = 1,
-				durability_description_key = "description.science-pack-remaining-amount-key",
-				factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
-				durability_description_value = "description.science-pack-remaining-amount-value"
-			},
-			{
-				type = "recipe",
-				name = card.name,
-				localised_name = {"", card.localised_name},
-				enabled = false,
-				category = "crafting",
-				energy_required = 10,
-				ingredients = ingredients,
-				results = {
-					{type = "item", name = card.name, amount = 1}
-				},
-				subgroup = system_card_subgroup,
-				order = card.order
-			}
-		})
+	for _, card in ipairs(card_definitions) do
+		local ingredients = build_card_ingredients(card)
+		local unlock_technology = find_first_existing_technology(card.unlock_technology_candidates)
 
-		if unlock_technology then
-			add_recipe_unlock(unlock_technology, card.name)
+		if #ingredients > 0 then
+			data:extend({
+				{
+					type = "tool",
+					name = card.name,
+					localised_name = {"", card.localised_name},
+					localised_description = {"item-description.science-pack"},
+					icons = {
+						{
+							icon = "__base__/graphics/icons/space-science-pack.png",
+							icon_size = 64,
+							tint = card.tint
+						}
+					},
+					subgroup = system_card_subgroup,
+					order = card.order,
+					stack_size = 200,
+					durability = 1,
+					durability_description_key = "description.science-pack-remaining-amount-key",
+					factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
+					durability_description_value = "description.science-pack-remaining-amount-value"
+				},
+				{
+					type = "recipe",
+					name = card.name,
+					localised_name = {"", card.localised_name},
+					enabled = false,
+					category = "crafting",
+					energy_required = 10,
+					ingredients = ingredients,
+					results = {
+						{type = "item", name = card.name, amount = 1}
+					},
+					subgroup = system_card_subgroup,
+					order = card.order
+				}
+			})
+
+			if unlock_technology then
+				add_recipe_unlock(unlock_technology, card.name)
+			end
 		end
 	end
 end
