@@ -57,6 +57,23 @@ local function remove_ingredient_if_present(recipe_name, ingredient_to_remove)
 	end
 end
 
+local function technology(name)
+	return data.raw.technology and data.raw.technology[name]
+end
+
+local function remove_technology_ingredient_if_present(technology_name, ingredient_to_remove)
+	local target_technology = technology(technology_name)
+	if not target_technology or not target_technology.unit or not target_technology.unit.ingredients then
+		return
+	end
+
+	for index = #target_technology.unit.ingredients, 1, -1 do
+		if ingredient_name(target_technology.unit.ingredients[index]) == ingredient_to_remove then
+			table.remove(target_technology.unit.ingredients, index)
+		end
+	end
+end
+
 local function harden_kr_sand_recipe()
 	local sand_recipe = recipe("kr-sand")
 	local crusher = data.raw.furnace and data.raw.furnace["kr-crusher"]
@@ -92,11 +109,34 @@ end
 function prototype_sanity.data_final_fixes()
 	harden_kr_sand_recipe()
 	remove_result_if_missing("planetaris-cactus-mash", "planetaris-cactus-seeds")
-	-- Hyarion refraction data is a Solaris-tier step; do not let a relocated
-	-- Crucible science pack drag it all the way into Beetlejuice.
-	remove_ingredient_if_present("refraction-research-data", "planet-crucible-science-pack")
-	remove_ingredient_if_present("refraction-research-data", "high-pressure-pack")
-	remove_ingredient_if_present("refraction-research-data", "high-pressure-science-pack")
+	-- Hyarion's K2SO refraction chain is a Solaris-tier step. Crucible's
+	-- broad data-updates sweep adds its science to any technology with the
+	-- three inner-planet packs, which incorrectly drags this branch into
+	-- Beetlejuice. Strip those late-added packs back out of the affected
+	-- Hyarion techs and the K2SO research-data alias that players see.
+	local hyarion_refraction_techs = {
+		"planetaris-refraction-science-pack",
+		"planetaris-particle-manipulation",
+		"planetaris-beryllium-processing",
+		"planetaris-space-facilities-1",
+		"planetaris-zero-grav-accumulator",
+		"planetaris-bismuth-processing",
+		"planetaris-electromagnetic-radar"
+	}
+	local crucible_pack_aliases = {
+		"planet-crucible-science-pack",
+		"high-pressure-pack",
+		"high-pressure-science-pack"
+	}
+
+	for _, ingredient_name_to_remove in ipairs(crucible_pack_aliases) do
+		remove_ingredient_if_present("refraction-research-data", ingredient_name_to_remove)
+		remove_ingredient_if_present("kr-refraction-research-data", ingredient_name_to_remove)
+
+		for _, technology_name in ipairs(hyarion_refraction_techs) do
+			remove_technology_ingredient_if_present(technology_name, ingredient_name_to_remove)
+		end
+	end
 end
 
 return prototype_sanity

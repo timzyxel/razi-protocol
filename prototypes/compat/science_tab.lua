@@ -85,9 +85,11 @@ end
 
 local function add_required_science_packs_to_labs(science_packs)
 	for _, lab in pairs(data.raw.lab or {}) do
-		if lab.inputs and lab_accepts_any(lab, science_packs) then
+		if lab.inputs and not lab_is_protected_unique_science_lab(lab) and lab_accepts_any(lab, science_packs) then
 			for _, science_pack in ipairs(science_packs) do
-				add_unique(lab.inputs, science_pack)
+				if not science_pack_is_lab_protected(science_pack) then
+					add_unique(lab.inputs, science_pack)
+				end
 			end
 		end
 	end

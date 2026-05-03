@@ -133,7 +133,7 @@ local function add_science_to_labs(science_pack)
 
 	for _, lab in pairs(data.raw.lab or {}) do
 		local inputs = lab.inputs
-		if inputs then
+		if inputs and not lab_is_protected_unique_science_lab(lab) then
 			local already_added = false
 			for _, input in ipairs(inputs) do
 				if input == science_pack then

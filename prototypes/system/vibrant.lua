@@ -163,6 +163,7 @@ deleteRoute("nauvis-ribbonia")
 deleteRoute("sye-beetlejuice-ribbonia")
 deleteRoute("cubium-ribbonia")
 deleteRoute("ribbonia-crucible-orbit")
+deleteRoute("ribbonia-vulcanus")
 deleteRoute("sye-vibrant-aquilo")
 deleteRoute("aquilo-rubia")
 

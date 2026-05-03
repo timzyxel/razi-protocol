@@ -4,8 +4,12 @@ Date: 22. 04. 2026
   Bugfixes:
     - Hardened the K2 sand recipe so `kr-sand` stays a crusher recipe with stone input instead of being left to late-stage category drift.
     - Added a compatibility for Planetaris Tellus/Arig so `planetaris-cactus-mash` drops its invalid `planetaris-cactus-seeds` result if the seed item prototype is missing.
-    - Added a late compatibility guard for `refraction-research-data` so Hyarion refraction progress no longer gets stranded behind Crucible's high-pressure science.
+    - Added a late compatibility guard for Hyarion's refraction K2SO branch so Crucible's broad science-pack sweep no longer strands the refraction tech card and downstream Hyarion refraction techs behind Beetlejuice science.
     - Fixed the Beetlejuice discovery chain after the starmap moves so Vesta now follows Crucible and Secretas now branches from Cubium.
+    - Restored Cerys and Moshine lab uniqueness by keeping protected science packs out of generic lab propagation and by stopping system/deep-space cards from being injected into those specialty labs.
+    - Restored distinct Vibrant-branch discovery science so Aquilo and the other moved planets no longer get flattened onto the same post-Nyxaris pack set.
+    - Removed the weird route from Vulcanus to Ribbonia that was added an update.
+    - Added some new dependencies for Tenebris to make it a whole lot better all around and hide bloat.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.5

@@ -125,6 +125,46 @@ function science_pack_exists(name)
 	return data.raw.tool and data.raw.tool[name] ~= nil
 end
 
+local protected_lab_science_pack_lookup = {
+	["lunar-science-pack"] = true,
+	["interstellar-science-pack"] = true,
+	["advanced-space-science-pack"] = true,
+	["cerysian-science-pack"] = true,
+	["aerospace-science-pack"] = true
+}
+
+function science_pack_is_lab_protected(name)
+	return protected_lab_science_pack_lookup[name] == true
+end
+
+function lab_has_science_input(lab, science_pack)
+	if not (lab and lab.inputs and science_pack) then
+		return false
+	end
+
+	for _, input in ipairs(lab.inputs) do
+		if input == science_pack then
+			return true
+		end
+	end
+
+	return false
+end
+
+function lab_is_protected_unique_science_lab(lab)
+	if not (lab and lab.inputs) then
+		return false
+	end
+
+	for science_pack, _ in pairs(protected_lab_science_pack_lookup) do
+		if lab_has_science_input(lab, science_pack) then
+			return true
+		end
+	end
+
+	return false
+end
+
 function add_science_pack_if_exists(ingredients, science_pack)
 	if science_pack_exists(science_pack) then
 		table.insert(ingredients, {science_pack, 1})

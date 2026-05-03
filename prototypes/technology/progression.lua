@@ -159,7 +159,7 @@ end
 
 local function add_science_to_labs(science_packs)
 	for _, lab in pairs(data.raw.lab or {}) do
-		if lab.inputs then
+		if lab.inputs and not lab_is_protected_unique_science_lab(lab) then
 			local accepts_science = false
 			for _, lab_input in ipairs(lab.inputs) do
 				if science_pack_exists(lab_input) then
@@ -170,7 +170,7 @@ local function add_science_to_labs(science_packs)
 
 			if accepts_science then
 				for _, science_pack in ipairs(science_packs) do
-					if science_pack_exists(science_pack) then
+					if science_pack_exists(science_pack) and not science_pack_is_lab_protected(science_pack) then
 						local already_exists = false
 						for _, lab_input in ipairs(lab.inputs) do
 							if lab_input == science_pack then
@@ -279,13 +279,6 @@ set_first_existing_prerequisite("planet-discovery-maraxsis", {
 	"planet-discovery-aquilo",
 	"vibrant-discovery"
 })
-set_many_science_after({
-	"planet-discovery-ribbonia",
-	"planet-discovery-paracelsin",
-	"planet-discovery-aquilo",
-	"planet-discovery-rubia",
-	"planet-discovery-maraxsis"
-}, "dea_dia_nyxaris")
 add_existing_prerequisites("beetlejuice-discovery", {
 	"planet-discovery-ribbonia",
 	"planet-discovery-paracelsin",

@@ -1,6 +1,6 @@
 {
 	"name": "razi-protocol",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
@@ -39,7 +39,7 @@
 
 		"? Arachnids_enemy",
 		"? ArmouredBiters",
-		"? Cold_biters",
+		"Cold_biters",
 		"? Electric_flying_enemies",
 		"? Explosive_biters",
 		"? Toxic_biters",
@@ -50,6 +50,7 @@
 		"xy-k2so-enhancements-nulls-fork",
 		"science-tab",
 		"rubia-krastorio-compatibility-plus",
+		"tenebris-prime-made-in-hide",
 		"? Cold_biters_K2_compatibility",
 		"? Explosive_biters_K2_compatibility",
 		"? Toxic_biters_K2_compatibility",
@@ -84,6 +85,7 @@
 		"? CircularColliderLab",
 		"? Quality-Asteroids-Expanded",
 		"? cargo-bay-inserters",
+		"? Tenebris_plants_retexture",
 
 		"! krastorio2_extended_endgame",
 		"! K2_spaced_out_extended_endgame",
