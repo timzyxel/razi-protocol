@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.2.4
+Date: 4. 05. 2026
+  Bugfixes:
+    - Fixed labs and biolabs so the system tech cards and required K2 tech cards are accepted properly.
+    - Fixed the Vibrant branch planet discoveries so Ribbonia, Paracelsin, Aquilo, Rubia, and Maraxsis all use the same compact Calidus/Solaris/Nyxaris card requirement pattern as the other system planet discoveries.
+    - Removed the stray Vulcanus to Ribbonia route again by deleting the connection by endpoints instead of only one route id spelling.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.3
 Date: 3. 05. 2026
   Bugfixes:

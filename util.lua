@@ -8,6 +8,24 @@ function deleteRoute(name)
 	end
 end
 
+function deleteRoutesBetween(location_a, location_b)
+	if not data.raw["space-connection"] then
+		return
+	end
+
+	for connection_name, connection in pairs(data.raw["space-connection"]) do
+		local from_name = connection and connection.from
+		local to_name = connection and connection.to
+		local matches_pair =
+			(from_name == location_a and to_name == location_b) or
+			(from_name == location_b and to_name == location_a)
+
+		if matches_pair then
+			data.raw["space-connection"][connection_name] = nil
+		end
+	end
+end
+
 function deleteAllRoutes()
 	if not data.raw["space-connection"] then
 		return

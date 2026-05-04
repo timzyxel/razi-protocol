@@ -164,6 +164,7 @@ deleteRoute("sye-beetlejuice-ribbonia")
 deleteRoute("cubium-ribbonia")
 deleteRoute("ribbonia-crucible-orbit")
 deleteRoute("ribbonia-vulcanus")
+deleteRoutesBetween("ribbonia", "vulcanus")
 deleteRoute("sye-vibrant-aquilo")
 deleteRoute("aquilo-rubia")
 
