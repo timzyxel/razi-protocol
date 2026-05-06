@@ -1,6 +1,6 @@
 {
 	"name": "razi-protocol",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
@@ -45,7 +45,7 @@
 		"? Toxic_biters",
 		"celestial-weather",
 		"paracelsin-krastorio-compatibility-plus",
-		"Imersite-Asteroids",
+		"? Imersite-Asteroids",
 	    "nulls-k2so-tweaks",
 		"xy-k2so-enhancements-nulls-fork",
 		"science-tab",

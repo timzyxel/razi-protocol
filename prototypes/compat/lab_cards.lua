@@ -1,7 +1,7 @@
 local lab_cards = {}
 
 local system_card_subgroup = "system-tech-card"
-local reduced_science_weight = 200
+local vanilla_science_weight = 1000
 
 local system_card_definitions = {
 	{
@@ -282,7 +282,7 @@ local function upsert_system_card(card)
 				subgroup = system_card_subgroup,
 				order = card.order,
 				stack_size = 200,
-				weight = reduced_science_weight,
+				weight = vanilla_science_weight,
 				durability = 1,
 				durability_description_key = "description.science-pack-remaining-amount-key",
 				factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
@@ -305,7 +305,7 @@ local function upsert_system_card(card)
 		tool.subgroup = system_card_subgroup
 		tool.order = card.order
 		tool.stack_size = 200
-		tool.weight = reduced_science_weight
+		tool.weight = vanilla_science_weight
 		tool.durability = 1
 		tool.durability_description_key = "description.science-pack-remaining-amount-key"
 		tool.factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key"
@@ -382,7 +382,7 @@ function lab_cards.data_final_fixes()
 	end
 
 	for _, science_name in ipairs(modded_science_ids) do
-		set_science_weight(science_name, reduced_science_weight)
+		set_science_weight(science_name, vanilla_science_weight)
 	end
 
 	for _, lab in pairs(data.raw.lab or {}) do
