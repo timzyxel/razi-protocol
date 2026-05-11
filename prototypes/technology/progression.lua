@@ -223,7 +223,7 @@ set_prerequisites_if_exists("planet-discovery-arig", {"planet-discovery-castra"}
 set_prerequisites_if_exists("planet-discovery-hyarion", {"planet-discovery-arig"})
 set_prerequisites_if_exists("planet-discovery-tellus", {"planet-discovery-hyarion"})
 set_prerequisites_if_exists("planet-discovery-corrundum", {"planet-discovery-tellus"})
-set_science_after("planet-discovery-castra", "inner_system")
+set_science_through("planet-discovery-castra", "base")
 set_many_science_after({
 	"planet-discovery-arig",
 	"planet-discovery-hyarion",

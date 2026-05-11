@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.2.6
+Date: 12. 05. 2026
+  Bugfixes:
+    - Fixed circular dependency in Castra planet discovery so it now requires base science packs instead of inner-system science packs, allowing players to unlock it sooner after discovering Solaris.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.5
 Date: 6. 05. 2026
   Changes:
