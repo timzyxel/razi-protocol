@@ -45,7 +45,6 @@
 		"? Toxic_biters",
 		"celestial-weather",
 		"celestial-weather-additions",
-		"paracelsin-krastorio-compatibility-plus",
 		"k2so-cubium-compatibility-fork",
 		"? Imersite-Asteroids",
 	    "nulls-k2so-tweaks",
@@ -89,6 +88,7 @@
 		"? cargo-bay-inserters",
 		"? Tenebris_plants_retexture",
 
+		"! aracelsin-krastorio-compatibility-plus",
 		"! krastorio2_extended_endgame",
 		"! K2_spaced_out_extended_endgame",
 		"! xy-k2so-enhancements",
