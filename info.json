@@ -1,6 +1,6 @@
 {
 	"name": "razi-protocol",
-	"version": "1.2.6",
+	"version": "1.3.0",
 	"title": "Razi Protocol",
 	"author": "Raziphel",
 	"homepage": "https://github.com/Raziphel/razi-protocol",
@@ -88,7 +88,8 @@
 		"? cargo-bay-inserters",
 		"? Tenebris_plants_retexture",
 
-		"! aracelsin-krastorio-compatibility-plus",
+		"! Redrawn-Space-Connections",
+		"! paracelsin-krastorio-compatibility-plus",
 		"! krastorio2_extended_endgame",
 		"! K2_spaced_out_extended_endgame",
 		"! xy-k2so-enhancements",

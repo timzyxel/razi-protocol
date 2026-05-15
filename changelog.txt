@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.0
+Date: 15. 05. 2026
+  Bugfixes:
+    - Cery's science packs/tech cards can no properly leave Cerys to be used for research on any planet!
+    - Added more mods to the incompatible list to prevent crashes from missing content when optional dependencies are not present, including a new incompatibility for Redrawn Space Connections to prevent crashes from its removed space connection entities.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.6
 Date: 12. 05. 2026
   Bugfixes:
