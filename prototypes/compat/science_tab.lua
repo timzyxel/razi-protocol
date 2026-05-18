@@ -31,50 +31,6 @@ local function move_science_pack(name, subgroup)
 	set_subgroup("recipe", name, subgroup)
 end
 
-local function science_pack_exists(name)
-	return
-		(data.raw.tool and data.raw.tool[name]) or
-		(data.raw.item and data.raw.item[name])
-end
-
-local function table_contains(values, value)
-	for _, existing in ipairs(values or {}) do
-		if existing == value then
-			return true
-		end
-	end
-
-	return false
-end
-
-local function add_unique(values, value)
-	if value and not table_contains(values, value) then
-		table.insert(values, value)
-	end
-end
-
-local function lab_accepts_any(lab, science_packs)
-	for _, science_pack in ipairs(science_packs) do
-		if table_contains(lab.inputs, science_pack) then
-			return true
-		end
-	end
-
-	return false
-end
-
-local function add_required_science_packs_to_labs(science_packs)
-	for _, lab in pairs(data.raw.lab or {}) do
-		if lab.inputs and not lab_is_protected_unique_science_lab(lab) and lab_accepts_any(lab, science_packs) then
-			for _, science_pack in ipairs(science_packs) do
-				if not science_pack_is_lab_protected(science_pack) then
-					add_unique(lab.inputs, science_pack)
-				end
-			end
-		end
-	end
-end
-
 function science_tab.data_updates()
 	if not mods["science-tab"] then
 		return
@@ -156,10 +112,10 @@ function science_tab.data_final_fixes()
 		set_subgroup("recipe", name, "research-data")
 	end
 
-	local lab_science_packs = collect_technology_science_packs()
-	add_unique_values(lab_science_packs, system_tech_cards)
-	add_unique_values(lab_science_packs, collect_recipe_science_packs(system_tech_cards))
-	add_required_science_packs_to_labs(lab_science_packs)
+	-- Do not add system tech cards to lab.inputs here.
+	-- This was a duplicate of progression.lua, and this duplicate must not exist.
+	-- Science Tab compatibility should only move science items between subgroups.
+	-- Deep space lab inputs are handled by omega-lab in nexus_endgame.lua.
 end
 
 return science_tab
