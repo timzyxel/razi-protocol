@@ -385,15 +385,9 @@ function lab_cards.data_final_fixes()
 		set_science_weight(science_name, vanilla_science_weight)
 	end
 
-	for _, lab in pairs(data.raw.lab or {}) do
-		if lab.inputs then
-			for _, science_name in ipairs(modded_science_ids) do
-				if science_pack_exists(science_name) then
-					add_unique_input(lab, science_name)
-				end
-			end
-		end
-	end
+	-- Do not add every modded science pack to every lab.
+	-- Planet and mod-specific science packs must stay on the labs that own them.
+	-- System tech cards are handled by progression.lua.
 end
 
 return lab_cards
