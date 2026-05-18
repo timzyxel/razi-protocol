@@ -93,8 +93,7 @@ local system_tech_cards = {
 	"solaris-tech-card",
 	"nyxaris-tech-card",
 	"vibrant-tech-card",
-	"beetlejuice-tech-card",
-	"deep-space-tech-card"
+	"beetlejuice-tech-card"
 }
 
 local transceiver_gate_technology = "razi-intergalactic-transceiver-signal"
@@ -157,31 +156,31 @@ local function set_many_science_after(technology_names, tier_name)
 	end
 end
 
+local regular_lab_names = {
+	"lab",
+	"kr-advanced-lab",
+	"biolab",
+	"kr-singularity-lab",
+	"thermodynamics-lab",
+	"pressure-lab"
+}
+
 local function add_science_to_labs(science_packs)
-	for _, lab in pairs(data.raw.lab or {}) do
-		if lab.inputs and not lab_is_protected_unique_science_lab(lab) then
-			local accepts_science = false
-			for _, lab_input in ipairs(lab.inputs) do
-				if science_pack_exists(lab_input) then
-					accepts_science = true
-					break
-				end
-			end
-
-			if accepts_science then
-				for _, science_pack in ipairs(science_packs) do
-					if science_pack_exists(science_pack) and not science_pack_is_lab_protected(science_pack) then
-						local already_exists = false
-						for _, lab_input in ipairs(lab.inputs) do
-							if lab_input == science_pack then
-								already_exists = true
-								break
-							end
+	for _, lab_name in ipairs(regular_lab_names) do
+		local lab = data.raw.lab and data.raw.lab[lab_name]
+		if lab and lab.inputs then
+			for _, science_pack in ipairs(science_packs) do
+				if science_pack_exists(science_pack) and not science_pack_is_lab_protected(science_pack) then
+					local already_exists = false
+					for _, lab_input in ipairs(lab.inputs) do
+						if lab_input == science_pack then
+							already_exists = true
+							break
 						end
+					end
 
-						if not already_exists then
-							table.insert(lab.inputs, science_pack)
-						end
+					if not already_exists then
+						table.insert(lab.inputs, science_pack)
 					end
 				end
 			end
@@ -352,7 +351,6 @@ set_first_existing_prerequisite("black-hole-discovery", {
 	"planet-nexus-scanning"
 })
 set_science_through("black-hole-discovery", "nexus")
-local generic_lab_science_packs = collect_technology_science_packs()
-add_unique_values(generic_lab_science_packs, system_tech_cards)
-add_unique_values(generic_lab_science_packs, collect_recipe_science_packs(system_tech_cards))
-add_science_to_labs(generic_lab_science_packs)
+-- Only the compressed system cards need to be added by this mod.
+-- Adding every science pack found in technologies makes all labs universal.
+add_science_to_labs(system_tech_cards)
