@@ -96,10 +96,30 @@ local function replace_recipe_ingredient(recipe_name, from, to)
 		return
 	end
 
-	for _, ingredient in pairs(recipe.ingredients or {}) do
-		if entry_name(ingredient) == from then
-			set_entry_name(ingredient, to)
+	local function replace_in_ingredients(ingredients)
+		for _, ingredient in pairs(ingredients or {}) do
+			if entry_name(ingredient) == from then
+				set_entry_name(ingredient, to)
+			end
 		end
+	end
+
+	replace_in_ingredients(recipe.ingredients)
+	if recipe.normal then
+		replace_in_ingredients(recipe.normal.ingredients)
+	end
+	if recipe.expensive then
+		replace_in_ingredients(recipe.expensive.ingredients)
+	end
+end
+
+local function replace_missing_magazine_ingredients_globally(from, to)
+	if item_exists(from) or not item_exists(to) then
+		return
+	end
+
+	for recipe_name, _ in pairs(data.raw.recipe or {}) do
+		replace_recipe_ingredient(recipe_name, from, to)
 	end
 end
 
@@ -125,6 +145,7 @@ end
 
 function compat.data_final_fixes()
 	fix_corrosive_magazine_without_k2_rifles()
+	replace_missing_magazine_ingredients_globally("kr-rifle-magazine", "firearm-magazine")
 end
 
 return compat
