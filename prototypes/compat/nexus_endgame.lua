@@ -126,26 +126,54 @@ local function tuck_away_omega_tool(tool_name)
 	end
 end
 
-local function add_science_to_labs(science_pack)
-	if not (data.raw.tool and data.raw.tool[science_pack]) then
+local function science_pack_exists(science_pack)
+	return
+		(data.raw.tool and data.raw.tool[science_pack]) or
+		(data.raw.item and data.raw.item[science_pack])
+end
+
+local function add_input_to_lab(lab, science_pack)
+	if not (lab and lab.inputs and science_pack_exists(science_pack)) then
 		return
 	end
 
-	for _, lab in pairs(data.raw.lab or {}) do
-		local inputs = lab.inputs
-		if inputs and not lab_is_protected_unique_science_lab(lab) then
-			local already_added = false
-			for _, input in ipairs(inputs) do
-				if input == science_pack then
-					already_added = true
-					break
+	for _, input in ipairs(lab.inputs) do
+		if input == science_pack then
+			return
+		end
+	end
+
+	table.insert(lab.inputs, science_pack)
+end
+
+local function collect_technology_science_packs()
+	local science_packs = {}
+	local added = {}
+
+	for _, technology in pairs(data.raw.technology or {}) do
+		local ingredients = technology.unit and technology.unit.ingredients
+		if ingredients then
+			for _, ingredient in ipairs(ingredients) do
+				local name = ingredient_name(ingredient)
+				if science_pack_exists(name) and not added[name] then
+					added[name] = true
+					table.insert(science_packs, name)
 				end
 			end
-
-			if not already_added then
-				table.insert(inputs, science_pack)
-			end
 		end
+	end
+
+	return science_packs
+end
+
+local function add_all_science_to_omega_lab()
+	local omega_lab = data.raw.lab and data.raw.lab["omega-lab"]
+	if not (omega_lab and omega_lab.inputs) then
+		return
+	end
+
+	for _, science_pack in ipairs(collect_technology_science_packs()) do
+		add_input_to_lab(omega_lab, science_pack)
 	end
 end
 
@@ -164,7 +192,7 @@ function nexus_endgame.data_final_fixes()
 	end
 
 	prune_omega_recipe_unlocks(data.raw.technology and data.raw.technology["promethium-882-research"])
-	add_science_to_labs(deep_space_card)
+	add_all_science_to_omega_lab()
 end
 
 return nexus_endgame
