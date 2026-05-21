@@ -125,6 +125,14 @@ Razi Protocol is designed around a large dependency set. Major content mods incl
 
 It also supports a number of optional quality-of-life, enemy, and compatibility mods. For the intended experience, use the optional mods listed in `info.json` where possible, but avoid adding extra collision-layer-heavy mods unless you know the total pack still fits under Factorio's hard collision-layer limit. `combat-mechanics-overhaul` is not listed as an optional dependency for that reason; it can push this pack over the 55 collision-layer engine cap when combined with several water, vehicle, enemy, and planet mods. Lignumis is also marked as incompatible for now because the full Razi Protocol pack already sits too close to that same collision-layer cap.
 
+## Support Me
+
+If you enjoy my mods and want to support future updates, you can connect with me here:
+
+- Join my Discord server: https://discord.gg/fTEtu64whV
+- Support me on Patreon: https://www.patreon.com/cw/Raziphel
+- Join the Foundry community and check out `#razis-mods`: https://discord.gg/Dn5p7GZpKu
+
 ## Credits
 
 Razi Protocol exists because of the Factorio modding community. The original planets, enemies, mechanics, concepts, art, sounds, and icons belong to their respective authors and contributors.

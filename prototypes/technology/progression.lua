@@ -213,8 +213,7 @@ set_science_after("beetlejuice-discovery", "vibrant")
 set_science_through("planet-discovery-muluna", "base")
 set_science_through("moon-discovery-cerys", "base")
 add_existing_prerequisites("solaris-discovery", {
-	"planet-discovery-muluna",
-	"moon-discovery-cerys"
+	"planet-discovery-muluna"
 })
 
 -- Solaris branch.
