@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.3
+Date: 21. 05. 2026
+  Bugfixes:
+    - Fixed Cerys science packs/tech cards not being accepted by non-Cerys research labs by adding detected Cerys science inputs to generic lab inputs in final fixes.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.3.0
 Date: 15. 05. 2026
   Bugfixes:
